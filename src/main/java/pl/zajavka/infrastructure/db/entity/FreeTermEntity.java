@@ -17,7 +17,7 @@ public class FreeTermEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "term")
     private OffsetDateTime term;
