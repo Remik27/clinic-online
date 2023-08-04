@@ -1,4 +1,4 @@
-CREATE TABLE free_terms
+CREATE TABLE free_term
 (
 	id			SERIAL 						NOT NULL,
 	doctor_id	INT							NOT NULL,

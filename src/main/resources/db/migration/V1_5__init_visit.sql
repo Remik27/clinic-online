@@ -6,7 +6,7 @@ CREATE TABLE visit
 	description	VARCHAR(255),
 	term		TIMESTAMP WITH TIME ZONE	NOT NULL,
 	status		VARCHAR(32)					NOT NULL,
-	PRIMARY KEY(id),
+   	PRIMARY KEY(id),
 	CONSTRAINT fk_doctor
 		FOREIGN KEY(doctor_id)
 			REFERENCES doctor(id),
