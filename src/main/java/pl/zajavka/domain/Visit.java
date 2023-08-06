@@ -3,8 +3,6 @@ package pl.zajavka.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import pl.zajavka.infrastructure.db.entity.DoctorEntity;
-import pl.zajavka.infrastructure.db.entity.PatientEntity;
 
 import java.time.OffsetDateTime;
 
@@ -21,9 +19,9 @@ public class Visit {
 
     private String status;
 
-    private DoctorEntity doctor;
+    private Doctor doctor;
 
-    private PatientEntity patient;
+    private Patient patient;
 
     enum Status{
         DONE,

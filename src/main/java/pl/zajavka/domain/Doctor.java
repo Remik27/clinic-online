@@ -4,8 +4,6 @@ package pl.zajavka.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import pl.zajavka.infrastructure.db.entity.FreeTermEntity;
-import pl.zajavka.infrastructure.db.entity.VisitEntity;
 
 import java.util.Set;
 
@@ -22,7 +20,7 @@ public class Doctor {
 
     private String pesel;
 
-    private Set<FreeTermEntity> freeTerms;
+    private Set<FreeTerm> freeTerms;
 
-    private Set<VisitEntity> visits;
+    private Set<Visit> visits;
 }

@@ -3,7 +3,6 @@ package pl.zajavka.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import pl.zajavka.infrastructure.db.entity.VisitEntity;
 
 import java.util.Set;
 
@@ -20,5 +19,5 @@ public class Patient {
 
     private String pesel;
 
-    private Set<VisitEntity> visits;
+    private Set<Visit> visits;
 }

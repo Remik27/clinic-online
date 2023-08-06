@@ -3,7 +3,6 @@ package pl.zajavka.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import pl.zajavka.infrastructure.db.entity.DoctorEntity;
 
 import java.time.OffsetDateTime;
 
@@ -15,5 +14,5 @@ public class FreeTerm {
 
     private OffsetDateTime term;
 
-    private DoctorEntity doctor;
+    private Doctor doctor;
 }
