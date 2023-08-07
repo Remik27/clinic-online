@@ -3,10 +3,12 @@ package pl.zajavka.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.With;
 
 import java.time.OffsetDateTime;
 
 @AllArgsConstructor
+@With
 @Builder
 @Data
 public class Visit {
@@ -17,13 +19,13 @@ public class Visit {
 
     private OffsetDateTime term;
 
-    private String status;
+    private Status status;
 
     private Doctor doctor;
 
     private Patient patient;
 
-    enum Status{
+    public enum Status{
         DONE,
         FUTURE,
         CANCELLED

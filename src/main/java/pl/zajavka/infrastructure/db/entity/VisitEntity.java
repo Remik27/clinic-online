@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.With;
 
 import java.time.OffsetDateTime;
 
 @Entity
 @AllArgsConstructor
+@With
 @Builder
 @Data
 @Table(name = "visit")
