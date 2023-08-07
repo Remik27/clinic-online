@@ -10,21 +10,21 @@ public class EntityFixtures {
 
     public static FreeTermEntity someTerm1(){
         return FreeTermEntity.builder()
-                .doctor(someDoctor1())
+                .doctor(DoctorEntity.builder().id(1).build())
                 .term(OffsetDateTime
                         .of(2023,10,23,8,30,0,0, ZoneOffset.UTC))
                 .build();
     }
     public static FreeTermEntity someTerm2(){
         return FreeTermEntity.builder()
-                .doctor(someDoctor1())
+                .doctor(DoctorEntity.builder().id(1).build())
                 .term(OffsetDateTime
                         .of(2023,10,23,9,30,0,0, ZoneOffset.UTC))
                 .build();
     }
     public static FreeTermEntity someTerm3(){
         return FreeTermEntity.builder()
-                .doctor(someDoctor1())
+                .doctor(DoctorEntity.builder().id(1).build())
                 .term(OffsetDateTime
                         .of(2023,10,23,10,30,0,0, ZoneOffset.UTC))
                 .build();
@@ -32,10 +32,10 @@ public class EntityFixtures {
 
     public static DoctorEntity someDoctor1() {
         return DoctorEntity.builder()
-                .id(1)
                 .name("some")
                 .surname("surname")
-                .pesel("12345678912")
+                .pesel("11111111111")
+                .specialization("okulista")
                 .build();
     }
 

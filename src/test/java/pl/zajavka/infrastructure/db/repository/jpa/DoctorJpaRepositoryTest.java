@@ -8,34 +8,29 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.TestPropertySource;
-import pl.zajavka.infrastructure.db.entity.FreeTermEntity;
+import pl.zajavka.infrastructure.db.entity.DoctorEntity;
 import pl.zajavka.integration.configuration.PersistenceContainerTestConfiguration;
-
-import java.util.List;
-
-import static pl.zajavka.util.EntityFixtures.*;
+import pl.zajavka.util.EntityFixtures;
 
 @DataJpaTest
 @TestPropertySource(locations = "classpath:application-test.yml")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @Import(PersistenceContainerTestConfiguration.class)
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-class FreeTermJpaRepositoryTest {
+class DoctorJpaRepositoryTest {
 
-    private FreeTermJpaRepository freeTermJpaRepository;
+    private final DoctorJpaRepository doctorJpaRepository;
 
     @Test
-    void freeTermsCanBeSavedCorrectly() {
+    void doctorCanBeSavedCorrectly(){
         //given
-        List<FreeTermEntity> terms = List.of(someTerm1(), someTerm2(), someTerm3());
-        freeTermJpaRepository.saveAll(terms);
+        DoctorEntity doctorEntity = EntityFixtures.someDoctor1();
 
         //when
-        List<FreeTermEntity> savedTerms = freeTermJpaRepository.findAll();
+        DoctorEntity saved = doctorJpaRepository.saveAndFlush(doctorEntity);
 
         //then
-
-        Assertions.assertEquals(terms.size(), savedTerms.size());
+        Assertions.assertEquals(doctorEntity, saved);
 
 
     }

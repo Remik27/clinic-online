@@ -10,4 +10,6 @@ public interface DoctorMapper {
 
 
     DoctorEntity mapToEntity(Doctor doctor);
+
+    Doctor mapFromEntity(DoctorEntity entity);
 }

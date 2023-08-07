@@ -4,10 +4,12 @@ package pl.zajavka.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Set;
 
 @AllArgsConstructor
+@EqualsAndHashCode(of = "pesel")
 @Builder
 @Data
 public class Doctor {
@@ -19,6 +21,8 @@ public class Doctor {
     private String surname;
 
     private String pesel;
+
+    private String specialization;
 
     private Set<FreeTerm> freeTerms;
 

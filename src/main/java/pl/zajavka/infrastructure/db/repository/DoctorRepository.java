@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import pl.zajavka.business.dao.DoctorDao;
 import pl.zajavka.domain.Doctor;
 import pl.zajavka.infrastructure.db.entity.DoctorEntity;
+import pl.zajavka.infrastructure.db.repository.jpa.DoctorJpaRepository;
 import pl.zajavka.infrastructure.db.repository.jpa.FreeTermJpaRepository;
 import pl.zajavka.infrastructure.db.repository.mapper.DoctorMapper;
 import pl.zajavka.infrastructure.db.repository.mapper.FreeTermMapper;
@@ -18,6 +19,7 @@ public class DoctorRepository implements DoctorDao {
     private final FreeTermMapper freeTermMapper;
     private final DoctorMapper doctorMapper;
     private final FreeTermJpaRepository freeTermJpaRepository;
+    private final DoctorJpaRepository doctorJpaRepository;
     @Override
     public void saveAllTerms(Doctor doctor) {
         DoctorEntity doctorEntity = doctorMapper.mapToEntity(doctor);
@@ -31,5 +33,12 @@ public class DoctorRepository implements DoctorDao {
                         freeTermJpaRepository.saveAndFlush(freeTermEntity);
                     }
                 );
+    }
+
+    @Override
+    public Doctor saveDoctor(Doctor doctor) {
+        DoctorEntity doctorEntity = doctorMapper.mapToEntity(doctor);
+        DoctorEntity saved = doctorJpaRepository.saveAndFlush(doctorEntity);
+        return doctorMapper.mapFromEntity(saved);
     }
 }

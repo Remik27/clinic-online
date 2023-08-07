@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.With;
 
 import java.util.Set;
 
 @Entity
 @AllArgsConstructor
+@With
 @Builder
 @Data
 @Table(name = "doctor")
@@ -28,6 +30,9 @@ public class DoctorEntity {
 
     @Column(name = "pesel")
     private String pesel;
+
+    @Column(name = "specialization")
+    private String specialization;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor")
     private Set<FreeTermEntity> freeTerms;

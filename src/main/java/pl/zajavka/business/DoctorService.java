@@ -1,8 +1,9 @@
-package pl.zajavka.business.dao;
+package pl.zajavka.business;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.zajavka.business.dao.DoctorDao;
 import pl.zajavka.domain.Doctor;
 
 @Service
@@ -11,8 +12,13 @@ public class DoctorService {
     private final DoctorDao doctorDao;
 
     @Transactional
-    void saveTerms(Doctor doctor){
+    public void saveTerms(Doctor doctor){
         doctorDao.saveAllTerms(doctor);
+    }
+
+    @Transactional
+    public Doctor saveDoctor(Doctor doctor){
+        return doctorDao.saveDoctor(doctor);
     }
 
 }
