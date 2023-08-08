@@ -1,15 +1,13 @@
 package pl.zajavka.domain;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import java.util.Set;
 
 @AllArgsConstructor
 @EqualsAndHashCode(of = "pesel")
+@With
 @Builder
 @Data
 public class Doctor {

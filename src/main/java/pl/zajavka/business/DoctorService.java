@@ -29,7 +29,7 @@ public class DoctorService {
     }
 
     @Transactional
-    public Visit addDescriptionToDoneVisit(VisitDescription visitDescription){
+    public Visit addDescriptionToVisit(VisitDescription visitDescription){
         Visit visit = visitService.findVisitById(visitDescription.getVisitId());
         if (visitService.isDone(visit)){
             return visitService.addDescription(visit, visitDescription.getDescription());
