@@ -4,6 +4,7 @@ import pl.zajavka.domain.*;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.Map;
 
 public class DomainFixtures {
 
@@ -72,6 +73,14 @@ public class DomainFixtures {
                 .description("some description")
                 .build();
     }
+
+    public static DiseaseHistory someDiseaseHistory(Map<OffsetDateTime, String> diseaseMap){
+        return DiseaseHistory.builder()
+                .patient(somePatient())
+                .diseaseHistory(diseaseMap)
+                .build();
+    }
+
 
 
 }

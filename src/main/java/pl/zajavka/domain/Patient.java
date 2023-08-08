@@ -3,10 +3,12 @@ package pl.zajavka.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.With;
 
 import java.util.Set;
 
 @AllArgsConstructor
+@With
 @Builder
 @Data
 public class Patient {
