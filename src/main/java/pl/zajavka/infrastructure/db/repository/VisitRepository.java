@@ -9,6 +9,8 @@ import pl.zajavka.infrastructure.db.entity.VisitEntity;
 import pl.zajavka.infrastructure.db.repository.jpa.VisitJpaRepository;
 import pl.zajavka.infrastructure.db.repository.mapper.VisitMapper;
 
+import java.util.List;
+
 @Repository
 @AllArgsConstructor
 public class VisitRepository implements VisitDao {
@@ -29,5 +31,13 @@ public class VisitRepository implements VisitDao {
                 .orElseThrow(() -> new NotFoundException("Not found visit with id [%d]".formatted(visitId)));
 
         return visitMapper.mapFromEntity(visitEntity);
+    }
+
+    @Override
+    public List<Visit> findVisitsByPatientId(Integer patientId) {
+        return visitJpaRepository.findByPatientId(patientId).stream()
+                .map(visitMapper::mapFromEntity)
+                .toList();
+
     }
 }

@@ -30,6 +30,9 @@ public class VisitEntity {
     @Column(name = "status")
     private String status;
 
+    @Column(name = "disease")
+    private String disease;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id")
     private DoctorEntity doctor;

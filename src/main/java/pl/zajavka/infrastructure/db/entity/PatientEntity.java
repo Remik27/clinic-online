@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Set;
 
 @Entity
 @AllArgsConstructor
+@EqualsAndHashCode(of = "pesel")
 @Builder
 @Data
 @Table(name = "patient")

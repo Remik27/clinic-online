@@ -12,6 +12,10 @@ import pl.zajavka.infrastructure.db.entity.VisitEntity;
 import pl.zajavka.integration.configuration.PersistenceContainerTestConfiguration;
 import pl.zajavka.util.EntityFixtures;
 
+import java.util.List;
+
+import static pl.zajavka.util.EntityFixtures.*;
+
 @DataJpaTest
 @TestPropertySource(locations = "classpath:application-test.yml")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -22,9 +26,9 @@ class VisitJpaRepositoryTest {
     private final VisitJpaRepository visitJpaRepository;
 
     @Test
-    void freeTermsCanBeSavedAndUpdateCorrectly() {
+    void visitCanBeSavedAndUpdateCorrectly() {
         //given
-        VisitEntity visitEntity = EntityFixtures.someVisit();
+        VisitEntity visitEntity = someVisit1();
         VisitEntity saved = visitJpaRepository.saveAndFlush(visitEntity);
         VisitEntity visitEntityWithDescription = saved.withDescription("someDescription");
 
@@ -36,7 +40,15 @@ class VisitJpaRepositoryTest {
         //then
 
         Assertions.assertEquals(savedById, savedWithDescriptionById);
+    }
 
-
+    @Test
+    void visitsCanBeFoundByPatientId(){
+        //given
+        List<VisitEntity> visitEntities = visitJpaRepository.saveAll(List.of(someVisit1(), someVisit2()));
+        //when
+        List<VisitEntity> byPatientId = visitJpaRepository.findByPatientId(1);
+        //then
+        Assertions.assertEquals(visitEntities.size(), byPatientId.size());
     }
 }

@@ -28,7 +28,7 @@ public class EntityFixtures {
         return FreeTermEntity.builder()
                 .doctor(DoctorEntity.builder().id(1).build())
                 .term(OffsetDateTime
-                        .of(2023,10,23,10,30,0,0, ZoneOffset.UTC))
+                        .of(2023,11,23,10,30,0,0, ZoneOffset.UTC))
                 .build();
     }
 
@@ -40,13 +40,32 @@ public class EntityFixtures {
                 .specialization("okulista")
                 .build();
     }
-    public static VisitEntity someVisit(){
+    public static VisitEntity someVisit1(){
         return VisitEntity.builder()
                 .doctor(DoctorEntity.builder().id(1).build())
                 .patient(PatientEntity.builder().id(1).build())
+                .disease("katar")
                 .term(OffsetDateTime
                         .of(2023,10,23,10,30,0,0, ZoneOffset.UTC))
                 .status("DONE")
+                .build();
+    }
+    public static VisitEntity someVisit2(){
+        return VisitEntity.builder()
+                .doctor(DoctorEntity.builder().id(1).build())
+                .patient(PatientEntity.builder().id(1).build())
+                .disease("gorączka")
+                .term(OffsetDateTime
+                        .of(2023,11,23,10,30,0,0, ZoneOffset.UTC))
+                .status("DONE")
+                .build();
+    }
+
+    public static PatientEntity somePatient(){
+        return PatientEntity.builder()
+                .name("test")
+                .surname("test")
+                .pesel("22222222222")
                 .build();
     }
 

@@ -1,0 +1,2 @@
+ALTER TABLE visit
+ADD COLUMN disease VARCHAR(255);

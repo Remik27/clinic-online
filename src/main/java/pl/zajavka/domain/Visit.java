@@ -19,6 +19,8 @@ public class Visit {
 
     private OffsetDateTime term;
 
+    private String disease;
+
     private Status status;
 
     private Doctor doctor;

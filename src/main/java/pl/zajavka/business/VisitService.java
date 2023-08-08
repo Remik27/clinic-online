@@ -1,14 +1,20 @@
 package pl.zajavka.business;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.zajavka.business.dao.VisitDao;
 import pl.zajavka.domain.Visit;
+
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class VisitService {
 
     private final VisitDao visitDao;
+
+    @Transactional
     public Visit addDescriptionAndChangeStatus(Visit visit, String description) {
         return visitDao.updateVisit(visit.withDescription(description).withStatus(Visit.Status.DONE));
     }
@@ -21,6 +27,7 @@ public class VisitService {
         return Visit.Status.DONE.equals(visit.getStatus());
     }
 
+    @Transactional
     public Visit addDescription(Visit visit, String description) {
         return visitDao.updateVisit(visit.withDescription(description));
     }
@@ -28,4 +35,9 @@ public class VisitService {
     public boolean isCancelled(Visit visit) {
         return Visit.Status.CANCELLED.equals(visit.getStatus());
     }
+
+    public List<Visit> findVisitsByPatientId(Integer patientId) {
+        return visitDao.findVisitsByPatientId(patientId);
+    }
 }
+
