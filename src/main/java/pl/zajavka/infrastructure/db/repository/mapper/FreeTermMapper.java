@@ -9,4 +9,6 @@ import pl.zajavka.infrastructure.db.entity.FreeTermEntity;
 public interface FreeTermMapper {
 
     FreeTermEntity mapToEntity(FreeTerm term);
+
+    FreeTerm mapFromEntity(FreeTermEntity entity);
 }

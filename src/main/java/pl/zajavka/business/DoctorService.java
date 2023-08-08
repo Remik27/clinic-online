@@ -5,9 +5,12 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.zajavka.business.dao.DoctorDao;
 import pl.zajavka.domain.Doctor;
+import pl.zajavka.domain.FreeTerm;
 import pl.zajavka.domain.Visit;
 import pl.zajavka.domain.VisitDescription;
 import pl.zajavka.domain.exception.UpdatingCancelledVisitException;
+
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -16,8 +19,8 @@ public class DoctorService {
     private final VisitService visitService;
 
     @Transactional
-    public void saveTerms(Doctor doctor){
-        doctorDao.saveAllTerms(doctor);
+    public List<FreeTerm> saveTerms(Doctor doctor){
+        return doctorDao.saveAllTerms(doctor);
     }
 
     @Transactional

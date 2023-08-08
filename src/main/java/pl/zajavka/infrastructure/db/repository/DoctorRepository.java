@@ -4,12 +4,16 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.zajavka.business.dao.DoctorDao;
 import pl.zajavka.domain.Doctor;
+import pl.zajavka.domain.FreeTerm;
 import pl.zajavka.infrastructure.db.entity.DoctorEntity;
+import pl.zajavka.infrastructure.db.entity.FreeTermEntity;
 import pl.zajavka.infrastructure.db.repository.jpa.DoctorJpaRepository;
 import pl.zajavka.infrastructure.db.repository.jpa.FreeTermJpaRepository;
 import pl.zajavka.infrastructure.db.repository.mapper.DoctorMapper;
 import pl.zajavka.infrastructure.db.repository.mapper.FreeTermMapper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Repository
@@ -21,8 +25,9 @@ public class DoctorRepository implements DoctorDao {
     private final FreeTermJpaRepository freeTermJpaRepository;
     private final DoctorJpaRepository doctorJpaRepository;
     @Override
-    public void saveAllTerms(Doctor doctor) {
+    public List<FreeTerm> saveAllTerms(Doctor doctor) {
         DoctorEntity doctorEntity = doctorMapper.mapToEntity(doctor);
+        List<FreeTermEntity> freeTermEntities = new ArrayList<>();
 
         doctor.getFreeTerms().stream()
                 .filter(term -> Objects.isNull(term.getId()))
@@ -30,9 +35,11 @@ public class DoctorRepository implements DoctorDao {
                 .forEach(
                     freeTermEntity -> {
                         freeTermEntity.setDoctor(doctorEntity);
-                        freeTermJpaRepository.saveAndFlush(freeTermEntity);
+                        freeTermEntities.add(freeTermEntity);
                     }
                 );
+        return freeTermJpaRepository.saveAllAndFlush(freeTermEntities)
+                .stream().map(freeTermMapper::mapFromEntity).toList();
     }
 
     @Override
