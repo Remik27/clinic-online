@@ -62,5 +62,10 @@ public class VisitService {
         }
         throw new WrongStatusException("Status must be DONE or FUTURE not [%s]".formatted(status.toString()));
     }
+@Transactional
+    public Visit cancelVisit(Visit visit) {
+        Visit visitCancelled = visit.withStatus(Visit.Status.CANCELLED);
+        return visitDao.updateVisit(visitCancelled);
+    }
 }
 

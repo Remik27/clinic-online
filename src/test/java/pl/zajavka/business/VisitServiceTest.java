@@ -170,11 +170,18 @@ class VisitServiceTest {
         Assertions.assertEquals(2, futureVisits.size());
         Assertions.assertTrue(doneVisits.get(0).getTerm().isAfter( doneVisits.get(1).getTerm()));
         Assertions.assertTrue(futureVisits.get(0).getTerm().isBefore( futureVisits.get(1).getTerm()));
+    }
+    @Test
+    void cancelVisitCanCancelCorrectly(){
+        //given
+        Visit visit = someVisit3();
+        Visit visitExpected = visit.withStatus(Visit.Status.CANCELLED);
+        //when
+        Mockito.when(visitDao.updateVisit(visitExpected)).thenReturn(visitExpected);
 
-
-
-
-
+        Visit cancelledVisit = visitService.cancelVisit(visit);
+        //then
+        Assertions.assertEquals(Visit.Status.CANCELLED, cancelledVisit.getStatus());
     }
 
 }
