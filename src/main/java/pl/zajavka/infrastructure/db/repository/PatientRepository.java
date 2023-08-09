@@ -23,4 +23,15 @@ public class PatientRepository implements PatientDao {
                 return patientMapper.mapFromEntity(byId);
 
     }
+
+    @Override
+    public Patient addPatient(Patient patient) {
+        PatientEntity patientEntity = patientJpaRepository.saveAndFlush(patientMapper.mapToEntity(patient));
+        return patientMapper.mapFromEntity(patientEntity);
+    }
+
+    @Override
+    public boolean checkExistencePatient(Patient patient) {
+        return patientJpaRepository.findByPesel(patient.getPesel()).isPresent();
+    }
 }

@@ -9,5 +9,7 @@ import java.util.Optional;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PatientMapper {
-    Patient mapFromEntity(PatientEntity byId);
+    Patient mapFromEntity(PatientEntity entity);
+
+    PatientEntity mapToEntity(Patient patient);
 }

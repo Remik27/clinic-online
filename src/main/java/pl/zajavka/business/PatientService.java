@@ -6,6 +6,7 @@ import pl.zajavka.business.dao.PatientDao;
 import pl.zajavka.domain.DiseaseHistory;
 import pl.zajavka.domain.Patient;
 import pl.zajavka.domain.Visit;
+import pl.zajavka.domain.exception.AlreadyExistException;
 import pl.zajavka.domain.exception.NotFoundException;
 
 import java.time.OffsetDateTime;
@@ -32,5 +33,17 @@ public class PatientService {
                 .patient(patient)
                 .diseaseHistory(diseasesMap)
                 .build();
+    }
+
+    public Patient addPatient(Patient patient) {
+        if (!checkExistencePatient(patient)) {
+            return patientDao.addPatient(patient);
+        }else {
+            throw new AlreadyExistException("Patient with pesel [%s] already exist".formatted(patient.getPesel()));
+        }
+    }
+
+    private boolean checkExistencePatient(Patient patient) {
+        return patientDao.checkExistencePatient(patient);
     }
 }
