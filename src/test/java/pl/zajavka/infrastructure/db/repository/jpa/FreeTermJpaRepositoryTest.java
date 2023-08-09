@@ -40,4 +40,17 @@ class FreeTermJpaRepositoryTest {
 
     }
 
+    @Test
+    void freeTermCanBeDeletedCorrectly() {
+        //given
+        List<FreeTermEntity> freeTermEntities = List.of(someTerm1(), someTerm2(), someTerm3());
+        List<FreeTermEntity> savedTerms = freeTermJpaRepository.saveAll(freeTermEntities);
+        //when
+        freeTermJpaRepository.delete(savedTerms.get(1));
+        List<FreeTermEntity> afterDelete = freeTermJpaRepository.findAll();
+        //then
+
+        Assertions.assertTrue(savedTerms.size() > afterDelete.size());
+    }
+
 }

@@ -10,4 +10,6 @@ public interface VisitDao {
     Visit findById(Integer visitId);
 
     List<Visit> findVisitsByPatientId(Integer patientId);
+
+    Visit saveVisit(Visit visit);
 }

@@ -20,4 +20,18 @@ public class FreeTermRepository implements FreeTermDao {
         List<FreeTermEntity> freeTermEntities = freeTerms.stream().map(freeTermMapper::mapToEntity).toList();
         freeTermJpaRepository.saveAll(freeTermEntities);
     }
+
+    @Override
+    public boolean checkAvailabilityOfTerm(Integer id) {
+        return freeTermJpaRepository.findById(id).isPresent();
+
+    }
+
+    @Override
+    public void delete(FreeTerm freeTerm) {
+        FreeTermEntity freeTermEntity = freeTermMapper.mapToEntity(freeTerm);
+        freeTermJpaRepository.delete(freeTermEntity);
+    }
+
+
 }

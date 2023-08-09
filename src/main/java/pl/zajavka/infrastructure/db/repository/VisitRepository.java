@@ -40,4 +40,11 @@ public class VisitRepository implements VisitDao {
                 .toList();
 
     }
+
+    @Override
+    public Visit saveVisit(Visit visit) {
+        VisitEntity visitEntity = visitMapper.mapToEntity(visit);
+        VisitEntity visitSaved = visitJpaRepository.saveAndFlush(visitEntity);
+        return visitMapper.mapFromEntity(visitSaved);
+    }
 }

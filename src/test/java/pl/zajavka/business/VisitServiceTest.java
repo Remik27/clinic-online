@@ -11,6 +11,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pl.zajavka.business.dao.VisitDao;
+import pl.zajavka.domain.FreeTerm;
 import pl.zajavka.domain.Patient;
 import pl.zajavka.domain.Visit;
 
@@ -30,7 +31,7 @@ class VisitServiceTest {
     private VisitService visitService;
 
     @Test
-    void addDescriptionAndChangeStatusCanBeUpdateCorrectly(){
+    void addDescriptionAndChangeStatusCanBeUpdateCorrectly() {
         //given
         Visit visit = someVisit1().withStatus(Visit.Status.FUTURE);
         String description = "some description";
@@ -42,13 +43,13 @@ class VisitServiceTest {
 
         //then
 
-        Assertions.assertEquals(Visit.Status.DONE,visitUpdated.getStatus() );
+        Assertions.assertEquals(Visit.Status.DONE, visitUpdated.getStatus());
         Assertions.assertEquals(description, visitUpdated.getDescription());
         Assertions.assertEquals(visitExpected, visitUpdated);
     }
 
     @Test
-    void addDescriptionCanBeUpdateCorrectly(){
+    void addDescriptionCanBeUpdateCorrectly() {
         //given
         Visit visit = someVisit1();
         String description = "some description";
@@ -63,8 +64,9 @@ class VisitServiceTest {
         Assertions.assertEquals(description, visitUpdated.getDescription());
         Assertions.assertEquals(visitExpected, visitUpdated);
     }
+
     @Test
-    void findVisitByIdCanBeFoundCorrectly(){
+    void findVisitByIdCanBeFoundCorrectly() {
         //given
         Visit visit = someVisit1().withId(1);
 
@@ -75,14 +77,16 @@ class VisitServiceTest {
         //then
         Assertions.assertEquals(visit, visitById);
     }
+
     @ParameterizedTest
     @MethodSource("isDoneData")
-    void isDoneCanCheckStatusCorrectly(Visit visit, boolean expect){
+    void isDoneCanCheckStatusCorrectly(Visit visit, boolean expect) {
         //when
         boolean done = visitService.isDone(visit);
         //then
         Assertions.assertEquals(expect, done);
     }
+
     public static Stream<Arguments> isDoneData() {
         return Stream.of(
                 Arguments.of(someVisit1().withStatus(Visit.Status.DONE), true),
@@ -90,14 +94,16 @@ class VisitServiceTest {
                 Arguments.of(someVisit1().withStatus(Visit.Status.CANCELLED), false)
         );
     }
+
     @ParameterizedTest
     @MethodSource("isCancelledData")
-    void isCancelledCanCheckStatusCorrectly(Visit visit, boolean expect){
+    void isCancelledCanCheckStatusCorrectly(Visit visit, boolean expect) {
         //when
         boolean done = visitService.isCancelled(visit);
         //then
         Assertions.assertEquals(expect, done);
     }
+
     public static Stream<Arguments> isCancelledData() {
         return Stream.of(
                 Arguments.of(someVisit1().withStatus(Visit.Status.DONE), false),
@@ -105,8 +111,9 @@ class VisitServiceTest {
                 Arguments.of(someVisit1().withStatus(Visit.Status.CANCELLED), true)
         );
     }
+
     @Test
-    void findVisitsByPatientIdCanFoundVisitsCorrectly(){
+    void findVisitsByPatientIdCanFoundVisitsCorrectly() {
         //given
         Patient patient1 = somePatient().withId(1);
         Patient patient2 = somePatient().withId(2);
@@ -123,6 +130,22 @@ class VisitServiceTest {
 
         Assertions.assertEquals(visits.size(), visitsByPatient1Id.size());
         Assertions.assertTrue(visitsByPatient2Id.isEmpty());
+
+
+    }
+
+    @Test
+    void buildVisitCanBuildCorrectly() {
+        //given
+        FreeTerm freeTerm = someTerm1();
+        Visit visit = someVisit3()
+                .withTerm(someTerm1().getTerm())
+                .withDoctor(freeTerm.getDoctor());
+        //when
+        Mockito.when(visitDao.saveVisit(visit)).thenReturn(visit);
+        Visit saved = visitService.buildVisit(visit.getPatient(), freeTerm);
+        //then
+        Assertions.assertEquals(visit, saved);
 
 
     }

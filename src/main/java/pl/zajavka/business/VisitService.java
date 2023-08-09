@@ -4,6 +4,8 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.zajavka.business.dao.VisitDao;
+import pl.zajavka.domain.FreeTerm;
+import pl.zajavka.domain.Patient;
 import pl.zajavka.domain.Visit;
 
 import java.util.List;
@@ -38,6 +40,17 @@ public class VisitService {
 
     public List<Visit> findVisitsByPatientId(Integer patientId) {
         return visitDao.findVisitsByPatientId(patientId);
+    }
+
+    @Transactional
+    public Visit buildVisit(Patient patient, FreeTerm freeTerm) {
+        Visit visit = Visit.builder()
+                .patient(patient)
+                .doctor(freeTerm.getDoctor())
+                .term(freeTerm.getTerm())
+                .status(Visit.Status.FUTURE)
+                .build();
+        return visitDao.saveVisit(visit);
     }
 }
 
