@@ -57,12 +57,22 @@ public class DomainFixtures {
                         .of(2023,11,23,10,30,0,0, ZoneOffset.UTC))
                 .status(Visit.Status.DONE)
                 .build();
-    }public static Visit someVisit3(){
+    }
+    public static Visit someVisit3(){
         return Visit.builder()
                 .doctor(Doctor.builder().id(1).build())
                 .patient(Patient.builder().id(1).build())
                 .term(OffsetDateTime
                         .of(2023,11,23,10,30,0,0, ZoneOffset.UTC))
+                .status(Visit.Status.FUTURE)
+                .build();
+    }
+    public static Visit someVisit4(){
+        return Visit.builder()
+                .doctor(Doctor.builder().id(1).build())
+                .patient(Patient.builder().id(1).build())
+                .term(OffsetDateTime
+                        .of(2023,12,23,10,30,0,0, ZoneOffset.UTC))
                 .status(Visit.Status.FUTURE)
                 .build();
     }

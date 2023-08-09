@@ -16,6 +16,7 @@ import pl.zajavka.domain.Patient;
 import pl.zajavka.domain.Visit;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -146,6 +147,32 @@ class VisitServiceTest {
         Visit saved = visitService.buildVisit(visit.getPatient(), freeTerm);
         //then
         Assertions.assertEquals(visit, saved);
+    }
+    @Test
+    void getListVisitCanBeReturnCorrectly(){
+        //given
+        Patient patient = somePatient().withId(1);
+        List<Visit> visitsDone = new ArrayList<>(List.of(someVisit1(), someVisit2()));
+        visitsDone.sort(Comparator.comparing(Visit::getTerm));
+        List<Visit> visitsFuture = new ArrayList<>(List.of(someVisit3(), someVisit4()));
+        visitsDone.sort(Comparator.comparing(Visit::getTerm).reversed());
+        //when
+        Mockito.when(visitDao.getListDoneVisit(patient))
+                .thenReturn(visitsDone);
+        Mockito.when(visitDao.getListFutureVisit(patient))
+                .thenReturn(visitsFuture);
+
+        List<Visit> doneVisits = visitService.getListVisit(patient, Visit.Status.DONE);
+        List<Visit> futureVisits = visitService.getListVisit(patient, Visit.Status.FUTURE);
+        //then
+
+        Assertions.assertEquals(2, doneVisits.size());
+        Assertions.assertEquals(2, futureVisits.size());
+        Assertions.assertTrue(doneVisits.get(0).getTerm().isAfter( doneVisits.get(1).getTerm()));
+        Assertions.assertTrue(futureVisits.get(0).getTerm().isBefore( futureVisits.get(1).getTerm()));
+
+
+
 
 
     }

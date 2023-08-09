@@ -7,6 +7,7 @@ import pl.zajavka.business.dao.VisitDao;
 import pl.zajavka.domain.FreeTerm;
 import pl.zajavka.domain.Patient;
 import pl.zajavka.domain.Visit;
+import pl.zajavka.domain.exception.WrongStatusException;
 
 import java.util.List;
 
@@ -51,6 +52,15 @@ public class VisitService {
                 .status(Visit.Status.FUTURE)
                 .build();
         return visitDao.saveVisit(visit);
+    }
+
+    public List<Visit> getListVisit(Patient patient, Visit.Status status) {
+        if (Visit.Status.DONE.equals(status)){
+            return visitDao.getListDoneVisit(patient);
+        } else if (Visit.Status.FUTURE.equals(status)) {
+            return visitDao.getListFutureVisit(patient);
+        }
+        throw new WrongStatusException("Status must be DONE or FUTURE not [%s]".formatted(status.toString()));
     }
 }
 
