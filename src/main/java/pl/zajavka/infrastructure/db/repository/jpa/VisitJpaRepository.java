@@ -14,15 +14,15 @@ public interface VisitJpaRepository extends JpaRepository<VisitEntity, Integer> 
 
 
     @Query("""
-            SELECT * FROM visit
-            WHERE visit.patient_id = patientId AND visit.status = 'DONE'
+            SELECT visit FROM VisitEntity visit
+            WHERE visit.patient = :patientId AND visit.status = 'DONE'
             ORDER BY visit.term ASC
             """)
     List<VisitEntity> getListDoneVisit(final @Param("patientId") Integer patientId);
 
     @Query("""
-            SELECT * FROM visit
-            WHERE visit.patient_id = patientId AND visit.status = 'DONE'
+            SELECT visit FROM VisitEntity visit
+            WHERE visit.patient = :patientId AND visit.status = 'DONE'
             ORDER BY visit.term DESC
             """)
     List<VisitEntity> getListFutureVisit(final @Param("patientId") Integer patientId);

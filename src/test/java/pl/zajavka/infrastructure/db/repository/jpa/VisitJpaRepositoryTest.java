@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.TestPropertySource;
 import pl.zajavka.infrastructure.db.entity.VisitEntity;
 import pl.zajavka.integration.configuration.PersistenceContainerTestConfiguration;
-import pl.zajavka.util.EntityFixtures;
 
 import java.util.List;
 
