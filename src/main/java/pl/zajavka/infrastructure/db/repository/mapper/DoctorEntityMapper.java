@@ -6,7 +6,7 @@ import pl.zajavka.domain.Doctor;
 import pl.zajavka.infrastructure.db.entity.DoctorEntity;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface DoctorMapper {
+public interface DoctorEntityMapper {
 
 
     DoctorEntity mapToEntity(Doctor doctor);

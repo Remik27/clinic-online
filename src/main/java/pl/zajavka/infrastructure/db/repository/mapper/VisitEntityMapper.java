@@ -6,7 +6,7 @@ import pl.zajavka.domain.Visit;
 import pl.zajavka.infrastructure.db.entity.VisitEntity;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface VisitMapper {
+public interface VisitEntityMapper {
     VisitEntity mapToEntity(Visit visit);
 
     Visit mapFromEntity(VisitEntity entity);

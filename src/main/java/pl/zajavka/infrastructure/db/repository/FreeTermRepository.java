@@ -6,7 +6,7 @@ import pl.zajavka.business.dao.FreeTermDao;
 import pl.zajavka.domain.FreeTerm;
 import pl.zajavka.infrastructure.db.entity.FreeTermEntity;
 import pl.zajavka.infrastructure.db.repository.jpa.FreeTermJpaRepository;
-import pl.zajavka.infrastructure.db.repository.mapper.FreeTermMapper;
+import pl.zajavka.infrastructure.db.repository.mapper.FreeTermEntityMapper;
 
 import java.util.List;
 
@@ -14,10 +14,10 @@ import java.util.List;
 @AllArgsConstructor
 public class FreeTermRepository implements FreeTermDao {
     private final FreeTermJpaRepository freeTermJpaRepository;
-    private final FreeTermMapper freeTermMapper;
+    private final FreeTermEntityMapper freeTermEntityMapper;
     @Override
     public void saveAll(List<FreeTerm> freeTerms) {
-        List<FreeTermEntity> freeTermEntities = freeTerms.stream().map(freeTermMapper::mapToEntity).toList();
+        List<FreeTermEntity> freeTermEntities = freeTerms.stream().map(freeTermEntityMapper::mapToEntity).toList();
         freeTermJpaRepository.saveAll(freeTermEntities);
     }
 
@@ -29,8 +29,16 @@ public class FreeTermRepository implements FreeTermDao {
 
     @Override
     public void delete(FreeTerm freeTerm) {
-        FreeTermEntity freeTermEntity = freeTermMapper.mapToEntity(freeTerm);
+        FreeTermEntity freeTermEntity = freeTermEntityMapper.mapToEntity(freeTerm);
         freeTermJpaRepository.delete(freeTermEntity);
+    }
+
+    @Override
+    public List<FreeTerm> getTermsBySpecialization(String specialization) {
+        return freeTermJpaRepository.getFreeTermsBySpecialization(specialization).stream()
+                .map(freeTermEntityMapper::mapFromEntity)
+                .toList();
+
     }
 
 

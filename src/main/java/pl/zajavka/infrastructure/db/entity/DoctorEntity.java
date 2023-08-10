@@ -1,15 +1,13 @@
 package pl.zajavka.infrastructure.db.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.With;
+import lombok.*;
 
 import java.util.Set;
 
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @With
 @Builder
 @Data

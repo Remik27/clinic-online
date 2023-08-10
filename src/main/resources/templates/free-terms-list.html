@@ -11,7 +11,7 @@
   <script th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.min.js}"></script>
   <style>
         body {
-            background-color: #3DFFFC;
+            background-color: #C2FAE2;
         }
         .centered-container {
             display: flex;
@@ -35,7 +35,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="freeTerm : ${freeTerm}">
+    <tr th:each="freeTerm : ${freeTermDtos}">
       <td th:text="${freeTerm.date}"></td>
       <td th:text="${freeTerm.time}"></td>
       <td th:text="${freeTerm.doctorName}"></td>
@@ -46,7 +46,7 @@
     </tbody>
   </table>
   <div class="mt-4">
-    <a th:href="@{/public/home}" class="btn btn-secondary">Strona główna</a>
+    <a th:href="@{/}" class="btn btn-secondary">Strona główna</a>
   </div>
 
 </div>

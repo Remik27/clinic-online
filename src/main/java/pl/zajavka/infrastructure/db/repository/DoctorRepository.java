@@ -9,8 +9,8 @@ import pl.zajavka.infrastructure.db.entity.DoctorEntity;
 import pl.zajavka.infrastructure.db.entity.FreeTermEntity;
 import pl.zajavka.infrastructure.db.repository.jpa.DoctorJpaRepository;
 import pl.zajavka.infrastructure.db.repository.jpa.FreeTermJpaRepository;
-import pl.zajavka.infrastructure.db.repository.mapper.DoctorMapper;
-import pl.zajavka.infrastructure.db.repository.mapper.FreeTermMapper;
+import pl.zajavka.infrastructure.db.repository.mapper.DoctorEntityMapper;
+import pl.zajavka.infrastructure.db.repository.mapper.FreeTermEntityMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,18 +20,18 @@ import java.util.Objects;
 @AllArgsConstructor
 public class DoctorRepository implements DoctorDao {
 
-    private final FreeTermMapper freeTermMapper;
-    private final DoctorMapper doctorMapper;
+    private final FreeTermEntityMapper freeTermEntityMapper;
+    private final DoctorEntityMapper doctorEntityMapper;
     private final FreeTermJpaRepository freeTermJpaRepository;
     private final DoctorJpaRepository doctorJpaRepository;
     @Override
     public List<FreeTerm> saveAllTerms(Doctor doctor) {
-        DoctorEntity doctorEntity = doctorMapper.mapToEntity(doctor);
+        DoctorEntity doctorEntity = doctorEntityMapper.mapToEntity(doctor);
         List<FreeTermEntity> freeTermEntities = new ArrayList<>();
 
         doctor.getFreeTerms().stream()
                 .filter(term -> Objects.isNull(term.getId()))
-                .map(freeTermMapper::mapToEntity)
+                .map(freeTermEntityMapper::mapToEntity)
                 .forEach(
                     freeTermEntity -> {
                         freeTermEntity.setDoctor(doctorEntity);
@@ -39,13 +39,13 @@ public class DoctorRepository implements DoctorDao {
                     }
                 );
         return freeTermJpaRepository.saveAllAndFlush(freeTermEntities)
-                .stream().map(freeTermMapper::mapFromEntity).toList();
+                .stream().map(freeTermEntityMapper::mapFromEntity).toList();
     }
 
     @Override
     public Doctor saveDoctor(Doctor doctor) {
-        DoctorEntity doctorEntity = doctorMapper.mapToEntity(doctor);
+        DoctorEntity doctorEntity = doctorEntityMapper.mapToEntity(doctor);
         DoctorEntity saved = doctorJpaRepository.saveAndFlush(doctorEntity);
-        return doctorMapper.mapFromEntity(saved);
+        return doctorEntityMapper.mapFromEntity(saved);
     }
 }

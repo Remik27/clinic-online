@@ -20,9 +20,16 @@ public class Doctor {
 
     private String pesel;
 
-    private String specialization;
+    private Specialization specialization;
 
     private Set<FreeTerm> freeTerms;
 
     private Set<Visit> visits;
+
+    public enum Specialization{
+        OKULISTA,
+        KARDIOLOG,
+        UROLOG
+
+    }
 }

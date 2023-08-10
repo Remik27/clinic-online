@@ -11,4 +11,6 @@ public interface FreeTermDao {
     boolean checkAvailabilityOfTerm(Integer id);
 
     void delete(FreeTerm freeTerm);
+
+    List<FreeTerm> getTermsBySpecialization(String specialization);
 }

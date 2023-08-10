@@ -35,7 +35,7 @@ public class DomainFixtures {
                 .name("some")
                 .surname("surname")
                 .pesel("11111111111")
-                .specialization("okulista")
+                .specialization(Doctor.Specialization.OKULISTA)
                 .build();
     }
     public static Visit someVisit1(){

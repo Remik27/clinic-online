@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.OffsetDateTime;
 
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Data
 @Table(name = "free_term")
@@ -22,7 +24,7 @@ public class FreeTermEntity {
     @Column(name = "term")
     private OffsetDateTime term;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "doctor_id")
     private DoctorEntity doctor;
 }

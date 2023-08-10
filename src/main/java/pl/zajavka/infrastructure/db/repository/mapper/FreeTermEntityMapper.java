@@ -6,7 +6,7 @@ import pl.zajavka.domain.FreeTerm;
 import pl.zajavka.infrastructure.db.entity.FreeTermEntity;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface FreeTermMapper {
+public interface FreeTermEntityMapper {
 
     FreeTermEntity mapToEntity(FreeTerm term);
 

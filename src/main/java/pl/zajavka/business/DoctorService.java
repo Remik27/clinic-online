@@ -10,6 +10,7 @@ import pl.zajavka.domain.Visit;
 import pl.zajavka.domain.VisitDescription;
 import pl.zajavka.domain.exception.UpdatingCancelledVisitException;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -41,4 +42,7 @@ public class DoctorService {
 
     }
 
+    public List<String> getSpecializations() {
+        return Arrays.stream(Doctor.Specialization.values()).map(Enum::name).toList();
+    }
 }

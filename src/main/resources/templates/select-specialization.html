@@ -11,7 +11,7 @@
   <script th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.min.js}"></script>
   <style>
         body {
-            background-color: #3DFFFC;
+            background-color: #C2FAE2;
         }
         .centered-container {
             display: flex;
@@ -26,10 +26,10 @@
 
   <h1>Wybierz specjalizację jakiej potrzebujesz</h1>
 
-  <form th:action="@{/free-terms-list}" method="post">
+  <form th:action="@{/free-terms}" method="post">
     <div class="mb-3">
-      <label for="specialization">Wybierz specjalizację lekarza :</label>
-      <select class="form-select" id="specialization" name="specialization">
+      <label for="specializations">Wybierz specjalizację lekarza :</label>
+      <select class="form-select" id="specializations" name="specialization">
         <option th:each="spec : ${specializations}" th:value="${spec}" th:text="${spec}"></option>
       </select>
     </div>
@@ -37,7 +37,7 @@
     <button type="submit" class="btn btn-primary">Szukaj</button>
   </form>
   <div class="mt-4">
-    <a th:href="@{/public/home}" class="btn btn-secondary">Strona główna</a>
+    <a th:href="@{/}" class="btn btn-secondary">Strona główna</a>
   </div>
 </div>
 

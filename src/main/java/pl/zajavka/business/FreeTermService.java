@@ -36,4 +36,7 @@ public class FreeTermService {
         return freeTermDao.checkAvailabilityOfTerm(freeTerm.getId());
     }
 
+    public List<FreeTerm> getTermsBySpecialization(String specialization) {
+        return freeTermDao.getTermsBySpecialization(specialization);
+    }
 }
