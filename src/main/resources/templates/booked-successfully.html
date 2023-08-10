@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Select specialization</title>
+  <title>Booked successfully</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
@@ -22,24 +22,16 @@
     </style>
 </head>
 <body>
-<div class="container mt-5" >
+<div class="container mt-5">
+  <h1>Wizyta zarezerwowana pomyślnie</h1>
 
-  <h1>Wybierz specjalizację jakiej potrzebujesz</h1>
 
-  <form th:action="@{/free-terms-list}" method="post">
-    <div class="mb-3">
-      <label for="specialization">Wybierz specjalizację lekarza :</label>
-      <select class="form-select" id="specialization" name="specialization">
-        <option th:each="spec : ${specializations}" th:value="${spec}" th:text="${spec}"></option>
-      </select>
-    </div>
+  <p>Lekarz: <span th:text="${visit.doctorName}"></span></p>
+  <p>Specjalizacja: <span th:text="${visit.specialization}"></span></p>
+  <p>Data: <span th:text="${visit.date}"></span></p>
+  <p>Godzina: <span th:text="${visit.time}"></span></p>
 
-    <button type="submit" class="btn btn-primary">Szukaj</button>
-  </form>
-  <div class="mt-4">
-    <a th:href="@{/public/home}" class="btn btn-secondary">Strona główna</a>
-  </div>
+  <a th:href="@{/public/home}" class="btn btn-primary mt-3">Strona główna</a>
 </div>
-
 </body>
 </html>
