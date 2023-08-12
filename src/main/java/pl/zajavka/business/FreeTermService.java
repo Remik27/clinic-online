@@ -39,4 +39,8 @@ public class FreeTermService {
     public List<FreeTerm> getTermsBySpecialization(String specialization) {
         return freeTermDao.getTermsBySpecialization(specialization);
     }
+
+    public FreeTerm getTerm(Integer freeTermId) {
+        return freeTermDao.getTerm(freeTermId);
+    }
 }

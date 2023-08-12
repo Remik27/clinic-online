@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 import pl.zajavka.business.dao.FreeTermDao;
 import pl.zajavka.domain.FreeTerm;
+import pl.zajavka.domain.exception.NotFoundException;
 import pl.zajavka.infrastructure.db.entity.FreeTermEntity;
 import pl.zajavka.infrastructure.db.repository.jpa.FreeTermJpaRepository;
 import pl.zajavka.infrastructure.db.repository.mapper.FreeTermEntityMapper;
@@ -39,6 +40,16 @@ public class FreeTermRepository implements FreeTermDao {
                 .map(freeTermEntityMapper::mapFromEntity)
                 .toList();
 
+    }
+
+    @Override
+    public FreeTerm getTerm(Integer freeTermId) {
+        return freeTermEntityMapper
+                .mapFromEntity(
+                        freeTermJpaRepository
+                                .findById(freeTermId)
+                                .orElseThrow(()-> new NotFoundException("Term with id [%d) not found"
+                                        .formatted(freeTermId))));
     }
 
 

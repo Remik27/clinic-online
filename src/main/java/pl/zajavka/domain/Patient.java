@@ -4,11 +4,11 @@ import lombok.*;
 
 import java.util.Set;
 
+@Data
 @AllArgsConstructor
 @EqualsAndHashCode(of = "pesel")
 @With
 @Builder
-@Data
 public class Patient {
 
     private Integer id;
@@ -20,4 +20,5 @@ public class Patient {
     private String pesel;
 
     private Set<Visit> visits;
+
 }

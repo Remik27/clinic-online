@@ -34,4 +34,9 @@ public class PatientRepository implements PatientDao {
     public boolean checkExistencePatient(Patient patient) {
         return patientJpaRepository.findByPesel(patient.getPesel()).isPresent();
     }
+
+    @Override
+    public Patient findPatientByPesel(String pesel) {
+        return patientEntityMapper.mapFromEntity(patientJpaRepository.findByPesel(pesel).orElseThrow(()-> new NotFoundException("Patient with pesel[%s] not found".formatted(pesel))));
+    }
 }

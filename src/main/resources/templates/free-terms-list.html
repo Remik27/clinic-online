@@ -40,7 +40,7 @@
       <td th:text="${freeTerm.time}"></td>
       <td th:text="${freeTerm.doctorName}"></td>
       <td>
-        <a class="btn btn-success" th:href="@{'/book-term/' + freeTerm.id}">Zarezerwuj</a>
+        <a class="btn btn-success" th:href="@{/book-term/{freeTermId}(freeTermId=${freeTerm.id})}">Zarezerwuj</a>
       </td>
     </tr>
     </tbody>

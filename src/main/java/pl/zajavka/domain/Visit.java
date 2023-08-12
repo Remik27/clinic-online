@@ -1,16 +1,13 @@
 package pl.zajavka.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.With;
+import lombok.*;
 
 import java.time.OffsetDateTime;
 
+@Data
 @AllArgsConstructor
 @With
 @Builder
-@Data
 public class Visit {
 
     private Integer id;
@@ -26,6 +23,10 @@ public class Visit {
     private Doctor doctor;
 
     private Patient patient;
+
+    protected boolean canEqual(final Object other) {
+        return other instanceof Visit;
+    }
 
     public enum Status{
         DONE,

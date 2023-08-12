@@ -13,4 +13,6 @@ public interface FreeTermDao {
     void delete(FreeTerm freeTerm);
 
     List<FreeTerm> getTermsBySpecialization(String specialization);
+
+    FreeTerm getTerm(Integer freeTermId);
 }

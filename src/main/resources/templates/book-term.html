@@ -26,21 +26,21 @@
     <h1>Podaj swoje dane aby zarezerwować wizytę</h1>
     <h2>Jeśli jesteś już naszym pacjentem wystarczy, że podasz nam swój pesel.</h2>
 
-    <form th:action="@{/book-term}" method="post">
-        <input type="hidden" name="termId" th:value="${termId}"/>
+    <form action="#" th:action="@{/book-term}" method="post" th:object="${patientDto}">
+        <input type="hidden" name="termId" th:value="${term.id}"/>
 
         <div class="mb-3">
             <label for="pesel">PESEL:</label>
-            <input type="text" class="form-control" id="pesel" name="pesel"/>
+            <input type="text" class="form-control" id="pesel" th:field="*{pesel}"/>
         </div>
 
         <div class="mb-3">
             <label for="name">Imię:</label>
-            <input type="text" class="form-control" id="name" name="name"/>
+            <input type="text" class="form-control" id="name" th:field="*{name}"/>
         </div>
         <div class="mb-3">
             <label for="surname">Nazwisko:</label>
-            <input type="text" class="form-control" id="surname" name="surname"/>
+            <input type="text" class="form-control" id="surname" th:field="*{surname}"/>
         </div>
 
         <button type="submit" class="btn btn-primary">Zarezerwuj</button>

@@ -46,4 +46,8 @@ public class PatientService {
     private boolean checkExistencePatient(Patient patient) {
         return patientDao.checkExistencePatient(patient);
     }
+
+    public Patient findPatientByPesel(String pesel) {
+        return patientDao.findPatientByPesel(pesel);
+    }
 }
