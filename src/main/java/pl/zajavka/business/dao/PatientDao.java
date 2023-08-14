@@ -10,4 +10,6 @@ public interface PatientDao {
     boolean checkExistencePatient(Patient patient);
 
     Patient findPatientByPesel(String pesel);
+
+    Patient findPatientByClinicUserId(Integer userId);
 }

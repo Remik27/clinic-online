@@ -16,5 +16,5 @@ public interface VisitDao {
 
     List<Visit> getListDoneVisit(Patient patient);
 
-    List<Visit> getListFutureVisit(Patient patient);
+    List<Visit> getListUpcomingVisit(Patient patient);
 }

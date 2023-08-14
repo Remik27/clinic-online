@@ -30,7 +30,7 @@ public class Visit {
 
     public enum Status{
         DONE,
-        FUTURE,
+        UPCOMING,
         CANCELLED
     }
 }

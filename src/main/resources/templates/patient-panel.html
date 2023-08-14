@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Patient panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+          crossorigin="anonymous">
+    <script th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.min.js}"></script>
+    <style>
+        body {
+            background-color: #C2FAE2;
+        }
+        .centered-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+        }
+
+    </style>
+</head>
+<body>
+<div class="centered-container">
+    <div class="mb-3">
+    <h1>Witaj w panelu pacjenta</h1>
+        <h1><span th:text="${patientDto.name}"></span> <span th:text="${patientDto.surname}"></span>!</h1>
+    <a  class="btn btn-primary" th:href= "@{/finished-visits/{pesel}(pesel=${patientDto.pesel})}" >Lista odbytych wizyt </a>
+    <a  class="btn btn-primary" th:href= "@{/upcoming-visits/{pesel}(pesel=${patientDto.pesel})}" >Lista nadchodzących wizyt  </a>
+
+    <div class="mt-4">
+        <a th:href="@{/}" class="btn btn-secondary">Strona główna</a>
+    </div>
+    </div>
+</div>
+</body>
+</html>

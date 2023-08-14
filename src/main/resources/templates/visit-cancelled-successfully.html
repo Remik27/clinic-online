@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Booked successfully</title>
+  <title>Visit cancelled successfully</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
         rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
@@ -17,16 +17,22 @@
     </style>
 </head>
 <body>
-<div class="container mt-5">
-  <h1>Wizyta zarezerwowana pomyślnie</h1>
+<h1>Anulowana Wizyta</h1>
 
+<p>Wizyta na:</p>
+<dl>
+  <dt>Data:</dt>
+  <dd th:text="${visitDto.date}"></dd>
 
-  <p>Lekarz: <span th:text="${visit.doctorName}"></span></p>
-  <p>Specjalizacja: <span th:text="${visit.specialization}"></span></p>
-  <p>Data: <span th:text="${visit.date}"></span></p>
-  <p>Godzina: <span th:text="${visit.time}"></span></p>
+  <dt>Godzina:</dt>
+  <dd th:text="${visitDto.time}"></dd>
 
-  <a th:href="@{/}" class="btn btn-primary mt-3">Strona główna</a>
-</div>
+  <dt>Lekarz:</dt>
+  <dd th:text="${visitDto.doctorName}"></dd>
+</dl>
+
+<p>Została pomyślnie anulowana.</p>
+
+<a href="/patient-panel" class="btn btn-primary">Powrót do panelu</a>
 </body>
 </html>

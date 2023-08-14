@@ -34,7 +34,7 @@ class VisitServiceTest {
     @Test
     void addDescriptionAndChangeStatusCanBeUpdateCorrectly() {
         //given
-        Visit visit = someVisit1().withStatus(Visit.Status.FUTURE);
+        Visit visit = someVisit1().withStatus(Visit.Status.UPCOMING);
         String description = "some description";
         Visit visitExpected = visit.withDescription(description).withStatus(Visit.Status.DONE);
 
@@ -91,7 +91,7 @@ class VisitServiceTest {
     public static Stream<Arguments> isDoneData() {
         return Stream.of(
                 Arguments.of(someVisit1().withStatus(Visit.Status.DONE), true),
-                Arguments.of(someVisit1().withStatus(Visit.Status.FUTURE), false),
+                Arguments.of(someVisit1().withStatus(Visit.Status.UPCOMING), false),
                 Arguments.of(someVisit1().withStatus(Visit.Status.CANCELLED), false)
         );
     }
@@ -108,7 +108,7 @@ class VisitServiceTest {
     public static Stream<Arguments> isCancelledData() {
         return Stream.of(
                 Arguments.of(someVisit1().withStatus(Visit.Status.DONE), false),
-                Arguments.of(someVisit1().withStatus(Visit.Status.FUTURE), false),
+                Arguments.of(someVisit1().withStatus(Visit.Status.UPCOMING), false),
                 Arguments.of(someVisit1().withStatus(Visit.Status.CANCELLED), true)
         );
     }
@@ -159,11 +159,11 @@ class VisitServiceTest {
         //when
         Mockito.when(visitDao.getListDoneVisit(patient))
                 .thenReturn(visitsDone);
-        Mockito.when(visitDao.getListFutureVisit(patient))
+        Mockito.when(visitDao.getListUpcomingVisit(patient))
                 .thenReturn(visitsFuture);
 
         List<Visit> doneVisits = visitService.getListVisit(patient, Visit.Status.DONE);
-        List<Visit> futureVisits = visitService.getListVisit(patient, Visit.Status.FUTURE);
+        List<Visit> futureVisits = visitService.getListVisit(patient, Visit.Status.UPCOMING);
         //then
 
         Assertions.assertEquals(2, doneVisits.size());
@@ -179,7 +179,7 @@ class VisitServiceTest {
         //when
         Mockito.when(visitDao.updateVisit(visitExpected)).thenReturn(visitExpected);
 
-        Visit cancelledVisit = visitService.cancelVisit(visit);
+        Visit cancelledVisit = visitService.cancelVisit(visit.getId());
         //then
         Assertions.assertEquals(Visit.Status.CANCELLED, cancelledVisit.getStatus());
     }

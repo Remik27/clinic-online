@@ -34,7 +34,11 @@ public class SecurityConfiguration {
                                         "/select-specialization",
                                         "/book-term/{freeTermId}",
                                         "/book-term").permitAll()
-                                .requestMatchers("/patient-panel").hasAnyAuthority("PATIENT")
+                                .requestMatchers("/patient-panel",
+                                        "/visit-details/**",
+                                        "/finished-visits/**",
+                                        "/upcoming-visits/**",
+                                        "/cancel-visit/**").hasAuthority("PATIENT")
                 )
                 .formLogin(Customizer.withDefaults())
                 .logout((logout) ->

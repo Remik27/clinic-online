@@ -49,7 +49,7 @@ public class VisitService {
                 .patient(patient)
                 .doctor(freeTerm.getDoctor())
                 .term(freeTerm.getTerm())
-                .status(Visit.Status.FUTURE)
+                .status(Visit.Status.UPCOMING)
                 .build();
         return visitDao.saveVisit(visit);
     }
@@ -57,15 +57,20 @@ public class VisitService {
     public List<Visit> getListVisit(Patient patient, Visit.Status status) {
         if (Visit.Status.DONE.equals(status)){
             return visitDao.getListDoneVisit(patient);
-        } else if (Visit.Status.FUTURE.equals(status)) {
-            return visitDao.getListFutureVisit(patient);
+        } else if (Visit.Status.UPCOMING.equals(status)) {
+            return visitDao.getListUpcomingVisit(patient);
         }
-        throw new WrongStatusException("Status must be DONE or FUTURE not [%s]".formatted(status.toString()));
+        throw new WrongStatusException("Status must be DONE or UPCOMING not [%s]".formatted(status.toString()));
     }
 @Transactional
-    public Visit cancelVisit(Visit visit) {
+    public Visit cancelVisit(Integer visitId) {
+        Visit visit = findVisitById(visitId);
         Visit visitCancelled = visit.withStatus(Visit.Status.CANCELLED);
         return visitDao.updateVisit(visitCancelled);
     }
+
+
+
+
 }
 

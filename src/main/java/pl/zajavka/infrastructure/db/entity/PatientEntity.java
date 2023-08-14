@@ -19,6 +19,8 @@ public class PatientEntity {
     @Column(name = "id")
     private Integer id;
 
+    @Column(name = "clinic_user_id")
+    private Integer clinicUserId;
 
     @Column(name = "name")
     private String name;
@@ -29,7 +31,7 @@ public class PatientEntity {
     @Column(name = "pesel")
     private String pesel;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "patient")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "patient")
     private Set<VisitEntity> visits;
 
 

@@ -8,6 +8,7 @@ import pl.zajavka.domain.Patient;
 import pl.zajavka.domain.Visit;
 import pl.zajavka.domain.exception.AlreadyExistException;
 import pl.zajavka.domain.exception.NotFoundException;
+import pl.zajavka.infrastructure.security.UserService;
 
 import java.time.OffsetDateTime;
 import java.util.HashMap;
@@ -21,9 +22,10 @@ public class PatientService {
 
     private final PatientDao patientDao;
     private final VisitService visitService;
+    private final UserService userService;
 
-    public DiseaseHistory showDiseaseHistory(Patient patient){
-        if (Objects.isNull(patientDao.findPatient(patient))){
+    public DiseaseHistory showDiseaseHistory(Patient patient) {
+        if (Objects.isNull(patientDao.findPatient(patient))) {
             throw new NotFoundException("Patient [%d] not found".formatted(patient.getId()));
         }
         List<Visit> visits = visitService.findVisitsByPatientId(patient.getId());
@@ -38,7 +40,7 @@ public class PatientService {
     public Patient addPatient(Patient patient) {
         if (!checkExistencePatient(patient)) {
             return patientDao.addPatient(patient);
-        }else {
+        } else {
             throw new AlreadyExistException("Patient with pesel [%s] already exist".formatted(patient.getPesel()));
         }
     }
@@ -49,5 +51,10 @@ public class PatientService {
 
     public Patient findPatientByPesel(String pesel) {
         return patientDao.findPatientByPesel(pesel);
+    }
+
+
+    public Patient findPatientByClinicUsername(String username) {
+        return patientDao.findPatientByClinicUserId(userService.getUserId(username));
     }
 }

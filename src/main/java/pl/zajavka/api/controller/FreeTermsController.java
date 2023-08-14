@@ -45,7 +45,7 @@ public class FreeTermsController {
         return new ModelAndView("select-specialization");
     }
 
-    @PostMapping(FREE_TERMS)
+    @GetMapping(FREE_TERMS)
     public ModelAndView showFreeTerms(@RequestParam String specialization, Model model){
         List<FreeTermDto> freeTerms = getTermsBySpecialization(specialization);
         model.addAttribute("freeTermDtos", freeTerms);

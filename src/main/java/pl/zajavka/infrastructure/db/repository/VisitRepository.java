@@ -56,8 +56,8 @@ public class VisitRepository implements VisitDao {
     }
 
     @Override
-    public List<Visit> getListFutureVisit(Patient patient) {
-        List<VisitEntity> listFutureVisit = visitJpaRepository.getListFutureVisit(patient.getId());
-        return listFutureVisit.stream().map(visitEntityMapper::mapFromEntity).toList();
+    public List<Visit> getListUpcomingVisit(Patient patient) {
+        List<VisitEntity> listUpcomingVisit = visitJpaRepository.getListFutureVisit(patient.getId());
+        return listUpcomingVisit.stream().map(visitEntityMapper::mapFromEntity).toList();
     }
 }

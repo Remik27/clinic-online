@@ -10,4 +10,7 @@ public interface PatientMapper {
     @Mapping(target = "visits", ignore = true)
     @Mapping(target = "id", ignore = true)
     Patient mapFromDto(PatientDto patientDto);
+
+
+    PatientDto mapToDto(Patient patient);
 }

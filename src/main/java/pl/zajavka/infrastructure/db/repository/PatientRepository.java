@@ -37,6 +37,14 @@ public class PatientRepository implements PatientDao {
 
     @Override
     public Patient findPatientByPesel(String pesel) {
-        return patientEntityMapper.mapFromEntity(patientJpaRepository.findByPesel(pesel).orElseThrow(()-> new NotFoundException("Patient with pesel[%s] not found".formatted(pesel))));
+        return patientEntityMapper.mapFromEntity(patientJpaRepository.findByPesel(pesel)
+                .orElseThrow(()-> new NotFoundException("Patient with pesel[%s] not found".formatted(pesel))));
+    }
+
+    @Override
+    public Patient findPatientByClinicUserId(Integer userId) {
+        PatientEntity patientEntity = patientJpaRepository.findByClinicUserId(userId)
+                .orElseThrow(()-> new NotFoundException("Patient with user id [%s] not found".formatted(userId)));
+        return patientEntityMapper.mapFromEntity(patientEntity);
     }
 }
