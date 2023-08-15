@@ -9,6 +9,7 @@ import pl.zajavka.domain.FreeTerm;
 import pl.zajavka.domain.Visit;
 import pl.zajavka.domain.VisitDescription;
 import pl.zajavka.domain.exception.UpdatingCancelledVisitException;
+import pl.zajavka.infrastructure.security.UserService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
 public class DoctorService {
     private final DoctorDao doctorDao;
     private final VisitService visitService;
+    private final UserService userService;
 
     @Transactional
     public List<FreeTerm> saveTerms(Doctor doctor){
@@ -44,5 +46,9 @@ public class DoctorService {
 
     public List<String> getSpecializations() {
         return Arrays.stream(Doctor.Specialization.values()).map(Enum::name).toList();
+    }
+
+    public Doctor findDoctorByClinicUsername(String username) {
+        return doctorDao.findDoctorByClinicUserId(userService.getUserId(username));
     }
 }

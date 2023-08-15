@@ -96,7 +96,7 @@ class DoctorServiceTest {
     void visitDescriptionCanBeAddedCorrectlyAndUpdateStatusWhenVisitIsFuture(){
         //given
         VisitDescription visitDescription = someVisitDescription();
-        Visit visit = someVisit1().withStatus(Visit.Status.FUTURE).withId(visitDescription.getVisitId());
+        Visit visit = someVisit1().withStatus(Visit.Status.UPCOMING).withId(visitDescription.getVisitId());
 
         //when
         Mockito.when(visitService.findVisitById(visitDescription.getVisitId())).thenReturn(visit);

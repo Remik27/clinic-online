@@ -39,6 +39,10 @@ public class SecurityConfiguration {
                                         "/finished-visits/**",
                                         "/upcoming-visits/**",
                                         "/cancel-visit/**").hasAuthority("PATIENT")
+                                .requestMatchers("/doctor-panel",
+                                        "/add-free-terms-form",
+                                        "/add-free-terms",
+                                        "/added-successfully").hasAuthority("DOCTOR")
                 )
                 .formLogin(Customizer.withDefaults())
                 .logout((logout) ->

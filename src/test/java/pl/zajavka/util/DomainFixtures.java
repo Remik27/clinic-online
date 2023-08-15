@@ -64,7 +64,7 @@ public class DomainFixtures {
                 .patient(Patient.builder().id(1).build())
                 .term(OffsetDateTime
                         .of(2023,11,23,10,30,0,0, ZoneOffset.UTC))
-                .status(Visit.Status.FUTURE)
+                .status(Visit.Status.UPCOMING)
                 .build();
     }
     public static Visit someVisit4(){
@@ -73,7 +73,7 @@ public class DomainFixtures {
                 .patient(Patient.builder().id(1).build())
                 .term(OffsetDateTime
                         .of(2023,12,23,10,30,0,0, ZoneOffset.UTC))
-                .status(Visit.Status.FUTURE)
+                .status(Visit.Status.UPCOMING)
                 .build();
     }
 

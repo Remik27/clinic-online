@@ -9,4 +9,6 @@ public interface DoctorDao {
     List<FreeTerm> saveAllTerms(Doctor doctor);
 
     Doctor saveDoctor(Doctor doctor);
+
+    Doctor findDoctorByClinicUserId(Integer userId);
 }

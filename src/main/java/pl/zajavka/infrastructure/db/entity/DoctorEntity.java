@@ -19,6 +19,8 @@ public class DoctorEntity {
     @Column(name = "id")
     private Integer id;
 
+    @Column(name = "clinic_user_id")
+    private Integer clinicUserId;
 
     @Column(name = "name")
     private String name;
