@@ -11,10 +11,7 @@ import pl.zajavka.domain.exception.NotFoundException;
 import pl.zajavka.infrastructure.security.UserService;
 
 import java.time.OffsetDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -28,8 +25,8 @@ public class PatientService {
         if (Objects.isNull(patientDao.findPatient(patient))) {
             throw new NotFoundException("Patient [%d] not found".formatted(patient.getId()));
         }
-        List<Visit> visits = visitService.findVisitsByPatientId(patient.getId());
-        Map<OffsetDateTime, String> diseasesMap = new HashMap<>();
+        List<Visit> visits = visitService.findVisitsByPatientIdAndStatus(patient.getId(), Visit.Status.DONE);
+        TreeMap<OffsetDateTime, String> diseasesMap = new TreeMap<>();
         visits.forEach(visit -> diseasesMap.put(visit.getTerm(), visit.getDisease()));
         return DiseaseHistory.builder()
                 .patient(patient)
@@ -56,5 +53,9 @@ public class PatientService {
 
     public Patient findPatientByClinicUsername(String username) {
         return patientDao.findPatientByClinicUserId(userService.getUserId(username));
+    }
+
+    public Patient findPatientByVisitId(Integer visitId) {
+        return patientDao.findPatientByVisitId(visitId);
     }
 }

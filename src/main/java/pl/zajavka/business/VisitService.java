@@ -72,5 +72,16 @@ public class VisitService {
 
 
 
+    public List<Visit> findUpcomingVisitsByDoctorId(Integer id, Visit.Status status) {
+        return switch (status) {
+            case UPCOMING -> visitDao.findUpcomingVisitsByDoctorId(id);
+            case DONE -> visitDao.findDoneVisitsByDoctorId(id);
+            default -> throw new WrongStatusException("Status [%s] is wrong".formatted(status));
+        };
+    }
+
+    public List<Visit> findVisitsByPatientIdAndStatus(Integer id, Visit.Status status) {
+        return visitDao.findVisitsByPatientIdAndStatus(id, status);
+    }
 }
 

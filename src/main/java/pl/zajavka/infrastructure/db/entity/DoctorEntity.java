@@ -37,7 +37,7 @@ public class DoctorEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor")
     private Set<FreeTermEntity> freeTerms;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "doctor")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "doctor")
     private Set<VisitEntity> visits;
 
 }

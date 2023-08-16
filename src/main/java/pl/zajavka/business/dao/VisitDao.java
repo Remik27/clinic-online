@@ -17,4 +17,10 @@ public interface VisitDao {
     List<Visit> getListDoneVisit(Patient patient);
 
     List<Visit> getListUpcomingVisit(Patient patient);
+
+    List<Visit> findUpcomingVisitsByDoctorId(Integer id);
+
+    List<Visit> findDoneVisitsByDoctorId(Integer id);
+
+    List<Visit> findVisitsByPatientIdAndStatus(Integer id, Visit.Status status);
 }

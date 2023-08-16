@@ -6,6 +6,7 @@ import lombok.Data;
 
 import java.time.OffsetDateTime;
 import java.util.Map;
+import java.util.TreeMap;
 
 @AllArgsConstructor
 @Builder
@@ -13,5 +14,5 @@ import java.util.Map;
 public class DiseaseHistory {
 
     private Patient patient;
-    private Map<OffsetDateTime, String> diseaseHistory;
+    private TreeMap<OffsetDateTime, String> diseaseHistory;
 }

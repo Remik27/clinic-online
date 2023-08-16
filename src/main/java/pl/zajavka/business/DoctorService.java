@@ -51,4 +51,11 @@ public class DoctorService {
     public Doctor findDoctorByClinicUsername(String username) {
         return doctorDao.findDoctorByClinicUserId(userService.getUserId(username));
     }
+
+
+
+
+    public List<Visit> getVisitsByDoctorId(Integer id, Visit.Status status) {
+        return visitService.findUpcomingVisitsByDoctorId(id, status);
+    }
 }

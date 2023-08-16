@@ -47,4 +47,10 @@ public class PatientRepository implements PatientDao {
                 .orElseThrow(()-> new NotFoundException("Patient with user id [%s] not found".formatted(userId)));
         return patientEntityMapper.mapFromEntity(patientEntity);
     }
+
+    @Override
+    public Patient findPatientByVisitId(Integer visitId) {
+        PatientEntity patientEntity = patientJpaRepository.findPatientByVisitId(visitId);
+        return patientEntityMapper.mapFromEntity(patientEntity);
+    }
 }

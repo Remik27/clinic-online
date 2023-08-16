@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Upcoming visits for doctor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+          crossorigin="anonymous">
+    <script th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.min.js}"></script>
+    <style>
+        body {
+            background-color: #C2FAE2;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container text-center">
+    <h1>Lista Nadchodzących Wizyt</h1>
+</div>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Data</th>
+        <th>Godzina</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="visit : ${visitDtos}">
+        <td th:text="${visit.date}"></td>
+        <td th:text="${visit.time}"></td>
+        <td>
+            <form th:action="@{/patient-history/{visitId}(visitId=${visit.id})}" method="GET" style="display: inline;">
+                <button type="submit" class="btn btn-danger">Historia pacjenta</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/doctor-panel}" class="btn btn-primary">Powrót do Panelu Lekarza</a>
+</body>
+</html>

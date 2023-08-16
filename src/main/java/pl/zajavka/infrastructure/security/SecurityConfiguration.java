@@ -42,6 +42,8 @@ public class SecurityConfiguration {
                                 .requestMatchers("/doctor-panel",
                                         "/add-free-terms-form",
                                         "/add-free-terms",
+                                        "/doctor/upcoming-visits",
+                                        "/patient-history/{visitId}",
                                         "/added-successfully").hasAuthority("DOCTOR")
                 )
                 .formLogin(Customizer.withDefaults())

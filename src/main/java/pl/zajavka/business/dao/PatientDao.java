@@ -12,4 +12,6 @@ public interface PatientDao {
     Patient findPatientByPesel(String pesel);
 
     Patient findPatientByClinicUserId(Integer userId);
+
+    Patient findPatientByVisitId(Integer visitId);
 }
