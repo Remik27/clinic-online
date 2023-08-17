@@ -83,5 +83,14 @@ public class VisitService {
     public List<Visit> findVisitsByPatientIdAndStatus(Integer id, Visit.Status status) {
         return visitDao.findVisitsByPatientIdAndStatus(id, status);
     }
+
+    public Visit addDisease(Visit visit, String disease) {
+        return visitDao.updateVisit(visit.withDisease(disease));
+    }
+
+    public Visit finishVisit(String visitId) {
+        Visit visit = visitDao.findById(Integer.valueOf(visitId));
+        return visitDao.updateVisit(visit.withStatus(Visit.Status.DONE));
+    }
 }
 

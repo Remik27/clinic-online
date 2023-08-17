@@ -29,4 +29,6 @@ public class VisitDto {
     private Doctor.Specialization specialization;
 
     private Integer patientId;
+
+    private String patientPesel;
 }

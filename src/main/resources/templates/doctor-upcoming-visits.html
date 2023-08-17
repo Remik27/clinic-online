@@ -26,6 +26,7 @@
         <th>Data</th>
         <th>Godzina</th>
         <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -34,7 +35,13 @@
         <td th:text="${visit.time}"></td>
         <td>
             <form th:action="@{/patient-history/{visitId}(visitId=${visit.id})}" method="GET" style="display: inline;">
-                <button type="submit" class="btn btn-danger">Historia pacjenta</button>
+                <button type="submit" class="btn btn-success">Historia pacjenta</button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/finish-visit/{visitId}(visitId=${visit.id})}" method="POST" style="display: inline;">
+                <input type="hidden" name="_method" value="PUT" />
+                <button type="submit" class="btn btn-danger">Zakończ wizytę</button>
             </form>
         </td>
     </tr>

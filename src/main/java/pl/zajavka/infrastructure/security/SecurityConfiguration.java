@@ -44,6 +44,11 @@ public class SecurityConfiguration {
                                         "/add-free-terms",
                                         "/doctor/upcoming-visits",
                                         "/patient-history/{visitId}",
+                                        "/doctor/finished-visits",
+                                        "/doctor/visit-details/{visitId}",
+                                        "/add-description",
+                                        "/add-diagnosis",
+                                        "/finish-visit/{visitId}",
                                         "/added-successfully").hasAuthority("DOCTOR")
                 )
                 .formLogin(Customizer.withDefaults())
