@@ -1,6 +1,9 @@
 package pl.zajavka.api.dto;
 
+import jakarta.validation.constraints.Future;
 import lombok.*;
+
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -9,8 +12,8 @@ import lombok.*;
 @Data
 public class FreeTermDto {
     private Integer id;
-
-    private String date;
+    @Future
+    private LocalDate date;
 
     private String time;
 

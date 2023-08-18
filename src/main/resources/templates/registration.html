@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta th:value="*{viewport}" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Registration</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+        crossorigin="anonymous">
+  <script th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.min.js}"></script>
+  <style>
+        body {
+            background-color: #C2FAE2;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+  <h1>Rejestracja użytkownika</h1>
+  <form action="#" th:action="@{/registration}" method="post" th:object="${userDto}">
+    <div class="mb-3">
+      <label for="login">Login:</label>
+      <input type="text" class="form-control" id="login" th:field="*{username}" required>
+    </div>
+    <div class="mb-3">
+      <label for="password">Hasło:</label>
+      <input type="password" class="form-control" id="password" th:field="*{password}" required>
+    </div>
+    <div class="mb-3">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" id="email" th:field="*{email}" required>
+    </div>
+    <div class="mb-3">
+      <label for="role">Rola:</label>
+      <select class="form-select" id="role" name="role" th:field="*{role}" required>
+        <option th:each="role : ${availableRoles}" th:value="${role}" th:text="${role}"></option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <h2>Jeśli jesteś już naszym pacjentem wystarczy, że podasz nam swój pesel.</h2>
+    </div>
+
+    <div class="mb-3">
+      <label for="name">Imię:</label>
+      <input type="text" class="form-control" id="name" th:field="*{name}">
+    </div>
+    <div class="mb-3">
+      <label for="surname">Nazwisko:</label>
+      <input type="text" class="form-control" id="surname" th:field="*{surname}">
+    </div>
+    <div class="mb-3">
+      <label for="pesel">PESEL:</label>
+      <input type="text" class="form-control" id="pesel" th:field="*{pesel}" required>
+    </div>
+    <div class="mb-3">
+      <label for="specialization">Specjalizacja(Jeśli tworzysz konto lekarza) :</label>
+      <select class="form-select" id="specialization" th:field="*{specialization}" name="specialization">
+        <option value="">Wybierz specjalizację</option>
+        <option th:each="specialization : ${availableSpecializations}" th:value="${specialization}" th:text="${specialization}"></option>
+      </select>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Zarejestruj</button>
+  </form>
+</div>
+</body>
+</html>

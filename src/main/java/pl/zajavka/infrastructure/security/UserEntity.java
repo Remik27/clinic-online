@@ -20,10 +20,9 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "username")
-    @Length(min = 5)
     private String userName;
 
     @Column(name = "email")

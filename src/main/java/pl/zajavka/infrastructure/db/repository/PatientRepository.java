@@ -53,4 +53,10 @@ public class PatientRepository implements PatientDao {
         PatientEntity patientEntity = patientJpaRepository.findPatientByVisitId(visitId);
         return patientEntityMapper.mapFromEntity(patientEntity);
     }
+
+    @Override
+    public Patient updatePatient(Patient patient) {
+        PatientEntity entity = patientEntityMapper.mapToEntity(patient);
+        return patientEntityMapper.mapFromEntity(patientJpaRepository.saveAndFlush(entity));
+    }
 }

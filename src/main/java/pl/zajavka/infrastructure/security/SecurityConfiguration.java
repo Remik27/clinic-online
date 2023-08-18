@@ -29,16 +29,18 @@ public class SecurityConfiguration {
                         authorizeHttpRequests
                                 .requestMatchers("/",
                                         "/login",
+                                        "/registration",
                                         "/home",
                                         "/free-terms",
                                         "/select-specialization",
                                         "/book-term/{freeTermId}",
+                                        "/registered-successfully",
                                         "/book-term").permitAll()
                                 .requestMatchers("/patient-panel",
                                         "/visit-details/**",
                                         "/finished-visits/**",
                                         "/upcoming-visits/**",
-                                        "/cancel-visit/**").hasAuthority("PATIENT")
+                                        "/cancel-visit/**").hasAuthority(Roles.PATIENT.name())
                                 .requestMatchers("/doctor-panel",
                                         "/add-free-terms-form",
                                         "/add-free-terms",
@@ -49,7 +51,7 @@ public class SecurityConfiguration {
                                         "/add-description",
                                         "/add-diagnosis",
                                         "/finish-visit/{visitId}",
-                                        "/added-successfully").hasAuthority("DOCTOR")
+                                        "/added-successfully").hasAuthority(Roles.DOCTOR.name())
                 )
                 .formLogin(Customizer.withDefaults())
                 .logout((logout) ->

@@ -19,7 +19,6 @@ public class PatientService {
 
     private final PatientDao patientDao;
     private final VisitService visitService;
-    private final UserService userService;
 
     public DiseaseHistory showDiseaseHistory(Patient patient) {
         if (Objects.isNull(patientDao.findPatient(patient))) {
@@ -51,11 +50,15 @@ public class PatientService {
     }
 
 
-    public Patient findPatientByClinicUsername(String username) {
-        return patientDao.findPatientByClinicUserId(userService.getUserId(username));
+    public Patient findPatientByClinicUserId(Integer userId) {
+        return patientDao.findPatientByClinicUserId(userId);
     }
 
     public Patient findPatientByVisitId(Integer visitId) {
         return patientDao.findPatientByVisitId(visitId);
+    }
+
+    public Patient updatePatient(Patient patient) {
+        return patientDao.updatePatient(patient);
     }
 }

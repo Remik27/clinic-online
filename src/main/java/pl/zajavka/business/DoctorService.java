@@ -19,7 +19,6 @@ import java.util.List;
 public class DoctorService {
     private final DoctorDao doctorDao;
     private final VisitService visitService;
-    private final UserService userService;
 
     @Transactional
     public List<FreeTerm> saveTerms(Doctor doctor){
@@ -48,8 +47,8 @@ public class DoctorService {
         return Arrays.stream(Doctor.Specialization.values()).map(Enum::name).toList();
     }
 
-    public Doctor findDoctorByClinicUsername(String username) {
-        return doctorDao.findDoctorByClinicUserId(userService.getUserId(username));
+    public Doctor findDoctorByClinicUserId(Integer userId) {
+        return doctorDao.findDoctorByClinicUserId(userId);
     }
 
 

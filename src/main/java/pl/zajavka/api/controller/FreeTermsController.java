@@ -10,9 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.zajavka.api.dto.FreeTermDto;
+import pl.zajavka.api.dto.FreeTermDtos;
 import pl.zajavka.api.dto.PatientDto;
 import pl.zajavka.api.dto.VisitDto;
-import pl.zajavka.api.dto.FreeTermDtos;
 import pl.zajavka.api.dto.mapper.FreeTermMapper;
 import pl.zajavka.api.dto.mapper.PatientMapper;
 import pl.zajavka.api.dto.mapper.VisitMapper;
@@ -23,10 +23,10 @@ import pl.zajavka.domain.Doctor;
 import pl.zajavka.domain.FreeTerm;
 import pl.zajavka.domain.Patient;
 import pl.zajavka.domain.Visit;
+import pl.zajavka.infrastructure.security.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Controller
 @RequestMapping()
@@ -45,6 +45,7 @@ public class FreeTermsController {
     private final PatientService patientService;
     private final PatientMapper patientMapper;
     private final VisitMapper visitMapper;
+    private final UserService userService;
 
     @GetMapping(value = SELECT_SPEC)
     public ModelAndView selectSpecialization(Model model) {
@@ -93,10 +94,10 @@ public class FreeTermsController {
         User user = (User) authentication.getPrincipal();
         String username = user.getUsername();
 
-        Doctor doctor = doctorService.findDoctorByClinicUsername(username);
+        Doctor doctor = doctorService.findDoctorByClinicUserId(userService.getUserId(username));
 
         List<FreeTerm> freeTerms = freeTermDtos.getFreeTermDtos().stream()
-                .filter(term -> !term.getDate().isBlank() || !term.getTime().isBlank())
+                .filter(term -> !term.getDate().toString().isBlank() || !term.getTime().isBlank())
                 .map(freeTermMapper::mapFromDto).toList();
         freeTerms.forEach((a) -> a.setDoctor(doctor));
 

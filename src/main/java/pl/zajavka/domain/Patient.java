@@ -13,6 +13,8 @@ public class Patient {
 
     private Integer id;
 
+    private Integer clinicUserId;
+
     private String name;
 
     private String surname;

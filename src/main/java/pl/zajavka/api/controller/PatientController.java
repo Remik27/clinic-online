@@ -20,6 +20,7 @@ import pl.zajavka.business.VisitService;
 import pl.zajavka.domain.DiseaseHistory;
 import pl.zajavka.domain.Patient;
 import pl.zajavka.domain.Visit;
+import pl.zajavka.infrastructure.security.UserService;
 
 import java.util.List;
 
@@ -39,6 +40,7 @@ public class PatientController {
     private final PatientMapper patientMapper;
     private final VisitService visitService;
     private final VisitMapper visitMapper;
+    private final UserService userService;
 
     @GetMapping(PATIENT_PANEL)
     public ModelAndView showPatientPanel(Model model) {
@@ -47,7 +49,7 @@ public class PatientController {
         User user = (User) authentication.getPrincipal();
         String username = user.getUsername();
 
-        Patient patient = patientService.findPatientByClinicUsername(username);
+        Patient patient = patientService.findPatientByClinicUserId(userService.getUserId(username));
 
         PatientDto patientDto = patientMapper.mapToDto(patient);
         model.addAttribute("patientDto", patientDto);

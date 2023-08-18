@@ -14,4 +14,6 @@ public interface PatientDao {
     Patient findPatientByClinicUserId(Integer userId);
 
     Patient findPatientByVisitId(Integer visitId);
+
+    Patient updatePatient(Patient patient);
 }

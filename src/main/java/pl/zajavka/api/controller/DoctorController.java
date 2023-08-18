@@ -19,6 +19,7 @@ import pl.zajavka.business.DoctorService;
 import pl.zajavka.business.VisitService;
 import pl.zajavka.domain.Doctor;
 import pl.zajavka.domain.Visit;
+import pl.zajavka.infrastructure.security.UserService;
 
 import java.util.List;
 
@@ -36,8 +37,8 @@ public class DoctorController {
     private final DoctorService doctorService;
     private final DoctorMapper doctorMapper;
     private final VisitMapper visitMapper;
-
     private final VisitService visitService;
+    private final UserService userService;
 
 
     @GetMapping(DOCTOR_PANEL)
@@ -47,7 +48,7 @@ public class DoctorController {
         User user = (User) authentication.getPrincipal();
         String username = user.getUsername();
 
-        Doctor doctor = doctorService.findDoctorByClinicUsername(username);
+        Doctor doctor = doctorService.findDoctorByClinicUserId(userService.getUserId(username));
 
         DoctorDto doctorDto = doctorMapper.mapToDto(doctor);
         model.addAttribute("doctorDto",doctorDto);
@@ -62,7 +63,7 @@ public class DoctorController {
         User user = (User) authentication.getPrincipal();
         String username = user.getUsername();
 
-        Doctor doctor = doctorService.findDoctorByClinicUsername(username);
+        Doctor doctor = doctorService.findDoctorByClinicUserId(userService.getUserId(username));
         List<VisitDto> visits = doctorService.getVisitsByDoctorId(doctor.getId(), Visit.Status.UPCOMING).stream()
                 .map(visitMapper::mapToDto).toList();
         model.addAttribute("visitDtos",visits);
@@ -77,7 +78,7 @@ public class DoctorController {
         User user = (User) authentication.getPrincipal();
         String username = user.getUsername();
 
-        Doctor doctor = doctorService.findDoctorByClinicUsername(username);
+        Doctor doctor = doctorService.findDoctorByClinicUserId(userService.getUserId(username));
         List<VisitDto> visits = doctorService.getVisitsByDoctorId(doctor.getId(), Visit.Status.DONE).stream()
                 .map(visitMapper::mapToDto).toList();
         model.addAttribute("visitDtos",visits);

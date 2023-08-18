@@ -13,10 +13,7 @@ public interface FreeTermMapper extends OffsetDateTimeMapper {
     default FreeTermDto mapToDto(FreeTerm term){
         return FreeTermDto.builder()
                 .id(term.getId())
-                .date("%d-%d-%d"
-                        .formatted(term.getTerm().getYear(),
-                        term.getTerm().getMonthValue(),
-                        term.getTerm().getDayOfMonth()))
+                .date(term.getTerm().toLocalDate())
                 .time("%d:%d".formatted(term.getTerm().getHour(), term.getTerm().getMinute()))
                 .doctorName("%s %s".formatted(term.getDoctor().getName(), term.getDoctor().getSurname()))
                 .build();
