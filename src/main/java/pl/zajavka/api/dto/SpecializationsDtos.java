@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.With;
-import pl.zajavka.api.dto.FreeTermDto;
 
 import java.util.List;
 
@@ -12,6 +11,7 @@ import java.util.List;
 @Builder
 @With
 @Data
-public class FreeTermDtos {
-    private List<FreeTermDto> freeTermDtos;
+public class SpecializationsDtos {
+    private List<String> specializations;
+
 }

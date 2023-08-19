@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version "${springBootVerison}"
 	id 'io.spring.dependency-management' version "${dependencyManagmentVersion}"
+	id "org.openapi.generator" version "${openapiGeneratorVersion}"
 }
 
 group = 'pl.zajavka'
@@ -30,7 +31,7 @@ dependencies {
 
 
 	implementation 'org.flywaydb:flyway-core'
-    testImplementation 'org.projectlombok:lombok:1.18.22'
+    testImplementation 'org.projectlombok:lombok:1.18.26'
 	testImplementation 'org.projectlombok:lombok:1.18.22'
 	runtimeOnly 'org.postgresql:postgresql'
 
@@ -41,6 +42,11 @@ dependencies {
 	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
 
+	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocOpenApiVersion}"
+	implementation "org.openapitools:jackson-databind-nullable:${jacksonDatabindNullableVersion}"
+	implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+	implementation "io.swagger:swagger-annotations:${swaggerAnnotationsVersion}"
+
 
 	testCompileOnly 'org.projectlombok:lombok'
 	testAnnotationProcessor 'org.projectlombok:lombok'
@@ -50,6 +56,7 @@ dependencies {
 	testImplementation 'org.testcontainers:junit-jupiter'
 	testImplementation 'org.testcontainers:postgresql'
 }
+
 
 dependencyManagement {
 	imports {

@@ -23,4 +23,8 @@ public interface VisitDao {
     List<Visit> findDoneVisitsByDoctorId(Integer id);
 
     List<Visit> findVisitsByPatientIdAndStatus(Integer id, Visit.Status status);
+
+    List<Visit> getListCancelledVisits();
+
+    void delete(List<Visit> visits);
 }

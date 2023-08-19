@@ -42,7 +42,7 @@ public class PatientService {
         }
     }
 
-    private boolean checkExistencePatient(Patient patient) {
+    public boolean checkExistencePatient(Patient patient) {
         return patientDao.checkExistencePatient(patient);
     }
 

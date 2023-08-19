@@ -76,8 +76,20 @@ public class VisitRepository implements VisitDao {
     @Override
     public List<Visit> findVisitsByPatientIdAndStatus(Integer patientId, Visit.Status status) {
         List<VisitEntity> entities = visitJpaRepository.findByPatientIdAndStatus(patientId, status.toString());
-        List<Visit> visits = entities.stream().map(visitEntityMapper::mapFromEntity).toList();
-        return visits;
+        return entities.stream().map(visitEntityMapper::mapFromEntity).toList();
+    }
+
+    @Override
+    public List<Visit> getListCancelledVisits() {
+        return visitJpaRepository.findByStatus(Visit.Status.CANCELLED.name()).stream()
+                .map(visitEntityMapper::mapFromEntity)
+                .toList();
+    }
+
+    @Override
+    public void delete(List<Visit> visits) {
+        List<VisitEntity> entities = visits.stream().map(visitEntityMapper::mapToEntity).toList();
+        visitJpaRepository.deleteAll(entities);
     }
 
 }

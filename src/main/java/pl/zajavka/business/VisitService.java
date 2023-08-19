@@ -55,21 +55,20 @@ public class VisitService {
     }
 
     public List<Visit> getListVisit(Patient patient, Visit.Status status) {
-        if (Visit.Status.DONE.equals(status)){
+        if (Visit.Status.DONE.equals(status)) {
             return visitDao.getListDoneVisit(patient);
         } else if (Visit.Status.UPCOMING.equals(status)) {
             return visitDao.getListUpcomingVisit(patient);
         }
         throw new WrongStatusException("Status must be DONE or UPCOMING not [%s]".formatted(status.toString()));
     }
-@Transactional
+
+    @Transactional
     public Visit cancelVisit(Integer visitId) {
         Visit visit = findVisitById(visitId);
         Visit visitCancelled = visit.withStatus(Visit.Status.CANCELLED);
         return visitDao.updateVisit(visitCancelled);
     }
-
-
 
 
     public List<Visit> findUpcomingVisitsByDoctorId(Integer id, Visit.Status status) {
@@ -91,6 +90,14 @@ public class VisitService {
     public Visit finishVisit(String visitId) {
         Visit visit = visitDao.findById(Integer.valueOf(visitId));
         return visitDao.updateVisit(visit.withStatus(Visit.Status.DONE));
+    }
+
+    public List<Visit> findVisitsByStatus(Visit.Status status) {
+        return visitDao.getListCancelledVisits();
+    }
+
+    public void delete(List<Visit> visits) {
+        visitDao.delete(visits);
     }
 }
 

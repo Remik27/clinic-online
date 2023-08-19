@@ -16,6 +16,7 @@ import java.util.Map;
 public interface PatientMapper extends OffsetDateTimeMapper {
     @Mapping(target = "visits", ignore = true)
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "clinicUserId", ignore = true)
     Patient mapFromDto(PatientDto patientDto);
 
 

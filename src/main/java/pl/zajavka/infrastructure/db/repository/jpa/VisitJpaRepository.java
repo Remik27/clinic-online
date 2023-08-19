@@ -44,4 +44,6 @@ public interface VisitJpaRepository extends JpaRepository<VisitEntity, Integer> 
             ORDER BY visit.term ASC
             """)
     List<VisitEntity> getListDoneVisitByDoctor(Integer id);
+
+    List<VisitEntity> findByStatus(String status);
 }

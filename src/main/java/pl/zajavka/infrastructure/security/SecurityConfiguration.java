@@ -28,7 +28,6 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorizeHttpRequests ->
                         authorizeHttpRequests
                                 .requestMatchers("/",
-                                        "/login",
                                         "/registration",
                                         "/home",
                                         "/free-terms",
@@ -52,13 +51,13 @@ public class SecurityConfiguration {
                                         "/add-diagnosis",
                                         "/finish-visit/{visitId}",
                                         "/added-successfully").hasAuthority(Roles.DOCTOR.name())
+                                .requestMatchers("/api/**").hasAuthority(Roles.REST_API.name())
                 )
                 .formLogin(Customizer.withDefaults())
                 .logout((logout) ->
                         logout.deleteCookies("remove")
                                 .invalidateHttpSession(false)
-                                .logoutUrl("/custom-logout")
-                                .logoutSuccessUrl("/logout-success")
+                                .logoutSuccessUrl("/")
                                 .permitAll()
                 );
 

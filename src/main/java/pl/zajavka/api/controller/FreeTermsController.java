@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import pl.zajavka.api.dto.FreeTermDto;
-import pl.zajavka.api.dto.FreeTermDtos;
+import pl.zajavka.api.dto.FreeTermsDtos;
 import pl.zajavka.api.dto.PatientDto;
 import pl.zajavka.api.dto.VisitDto;
 import pl.zajavka.api.dto.mapper.FreeTermMapper;
@@ -87,7 +87,7 @@ public class FreeTermsController {
 
     @PostMapping(ADD_FREE_TERMS)
     public ModelAndView addNewTerms(
-            @ModelAttribute("freeTermDtos") FreeTermDtos freeTermDtos,
+            @Valid @ModelAttribute("freeTermDtos") FreeTermsDtos freeTermDtos,
             Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -112,7 +112,7 @@ public class FreeTermsController {
         for (int i = 0; i < 10; i++) {
             freeTermDtoList.add(FreeTermDto.builder().build());
         }
-        FreeTermDtos freeTermDtos = new FreeTermDtos(freeTermDtoList);
+        FreeTermsDtos freeTermDtos = new FreeTermsDtos(freeTermDtoList);
 
         model.addAttribute("freeTermDtos", freeTermDtos);
         return new ModelAndView("add-free-terms-form");
