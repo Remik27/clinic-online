@@ -27,14 +27,14 @@ import java.util.List;
 @Controller
 @AllArgsConstructor
 public class PatientController {
-    public static final String PATIENT_PANEL = "/patient-panel";
+    private static final String PATIENT_PANEL = "/patient-panel";
 
-    public static final String VISIT_DETAILS = "/visit-details/{visitId}";
+    private static final String VISIT_DETAILS = "/visit-details/{visitId}";
 
-    public static final String FINISHED_VISITS = "/finished-visits/{pesel}";
-    public static final String UPCOMING_VISITS = "/upcoming-visits/{pesel}";
-    public static final String CANCEL_VISIT = "/cancel-visit/{visitId}";
-    public static final String PATIENT_HISTORY = "/patient-history/{visitId}";
+    private static final String FINISHED_VISITS = "/finished-visits/{pesel}";
+    private static final String UPCOMING_VISITS = "/upcoming-visits/{pesel}";
+    private static final String CANCEL_VISIT = "/cancel-visit/{visitId}";
+    private static final String PATIENT_HISTORY = "/patient-history/{visitId}";
 
     private final PatientService patientService;
     private final PatientMapper patientMapper;

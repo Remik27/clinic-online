@@ -33,12 +33,12 @@ import java.util.List;
 @AllArgsConstructor
 public class FreeTermsController {
 
-    public static final String FREE_TERMS = "/free-terms";
-    public static final String SELECT_SPEC = "/select-specialization";
-    public static final String PREPARE_BOOKING = "/book-term/{freeTermId}";
-    public static final String BOOK_TERM = "/book-term";
-    public static final String ADD_FREE_TERMS = "/add-free-terms";
-    public static final String ADD_FREE_TERMS_FORM = "/add-free-terms-form";
+    private static final String FREE_TERMS = "/free-terms";
+    private static final String SELECT_SPEC = "/select-specialization";
+    private static final String PREPARE_BOOKING = "/book-term/{freeTermId}";
+    private static final String BOOK_TERM = "/book-term";
+    private static final String ADD_FREE_TERMS = "/add-free-terms";
+    private static final String ADD_FREE_TERMS_FORM = "/add-free-terms-form";
     private final DoctorService doctorService;
     private final FreeTermService freeTermService;
     private final FreeTermMapper freeTermMapper;

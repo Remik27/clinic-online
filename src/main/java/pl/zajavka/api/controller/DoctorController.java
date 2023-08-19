@@ -27,13 +27,13 @@ import java.util.List;
 @AllArgsConstructor
 public class DoctorController {
 
-    public static final String DOCTOR_PANEL = "/doctor-panel";
-    public static final String UPCOMING_VISITS = "/doctor/upcoming-visits";
-    public static final String VISIT_DETAILS = "/doctor/visit-details/{visitId}";
-    public static final String FINISHED_VISITS = "/doctor/finished-visits";
-    public static final String ADD_DESCRIPTION = "/add-description";
-    public static final String ADD_DIAGNOSIS = "/add-diagnosis";
-    public static final String FINISH_VISIT = "/finish-visit/{visitId}";
+    private static final String DOCTOR_PANEL = "/doctor-panel";
+    private static final String UPCOMING_VISITS = "/doctor/upcoming-visits";
+    private static final String VISIT_DETAILS = "/doctor/visit-details/{visitId}";
+    private static final String FINISHED_VISITS = "/doctor/finished-visits";
+    private static final String ADD_DESCRIPTION = "/add-description";
+    private static final String ADD_DIAGNOSIS = "/add-diagnosis";
+    private static final String FINISH_VISIT = "/finish-visit/{visitId}";
     private final DoctorService doctorService;
     private final DoctorMapper doctorMapper;
     private final VisitMapper visitMapper;

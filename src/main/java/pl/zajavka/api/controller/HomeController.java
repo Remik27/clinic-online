@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 @AllArgsConstructor
 public class HomeController {
-    public static final String HOME = "/" ;
+    private static final String HOME = "/" ;
 
     @GetMapping(value = HOME)
 public String homePage(){
