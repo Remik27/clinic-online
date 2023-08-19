@@ -16,8 +16,8 @@ import pl.zajavka.domain.exception.NotFoundException;
 
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import static pl.zajavka.util.DomainFixtures.*;
@@ -38,14 +38,15 @@ class PatientServiceTest {
     void diseaseHistoryCanBeShowCorrectly() {
         //given
         Patient patient = somePatient().withId(1);
-        List<Visit> visits = List.of(someVisit1(), someVisit2());
-        Map<OffsetDateTime, String> mapDisease =
-                visits.stream().collect(Collectors.toMap(Visit::getTerm, Visit::getDisease));
+        List<Visit> visits = List.of(someVisit1().withPatient(patient), someVisit2().withPatient(patient));
+        TreeMap<OffsetDateTime, String> mapDisease = new TreeMap<>(
+                visits.stream().collect(Collectors.toMap(Visit::getTerm, Visit::getDisease)));
 
         //when
-        Mockito.when(visitService.findVisitsByPatientId(patient.getId()))
-                .thenReturn(visits);
         Mockito.when(patientDao.findPatient(patient)).thenReturn(patient);
+        Mockito.when(visitService.findVisitsByPatientIdAndStatus(patient.getId(), Visit.Status.DONE))
+                .thenReturn(visits);
+
         DiseaseHistory diseaseHistory = patientService.showDiseaseHistory(patient);
 
         //then

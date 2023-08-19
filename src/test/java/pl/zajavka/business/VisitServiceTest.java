@@ -174,9 +174,10 @@ class VisitServiceTest {
     @Test
     void cancelVisitCanCancelCorrectly(){
         //given
-        Visit visit = someVisit3();
+        Visit visit = someVisit3().withId(1);
         Visit visitExpected = visit.withStatus(Visit.Status.CANCELLED);
         //when
+        Mockito.when(visitDao.findById(1)).thenReturn(visit);
         Mockito.when(visitDao.updateVisit(visitExpected)).thenReturn(visitExpected);
 
         Visit cancelledVisit = visitService.cancelVisit(visit.getId());

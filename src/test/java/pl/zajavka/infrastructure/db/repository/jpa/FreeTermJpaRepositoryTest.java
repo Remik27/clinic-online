@@ -2,6 +2,7 @@ package pl.zajavka.infrastructure.db.repository.jpa;
 
 import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -23,6 +24,11 @@ import static pl.zajavka.util.EntityFixtures.*;
 class FreeTermJpaRepositoryTest {
 
     private FreeTermJpaRepository freeTermJpaRepository;
+
+    @BeforeEach
+    void prepareDB() {
+        freeTermJpaRepository.deleteAll();
+    }
 
     @Test
     void freeTermsCanBeSavedCorrectly() {

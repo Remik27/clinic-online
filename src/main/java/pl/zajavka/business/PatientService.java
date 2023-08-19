@@ -8,10 +8,11 @@ import pl.zajavka.domain.Patient;
 import pl.zajavka.domain.Visit;
 import pl.zajavka.domain.exception.AlreadyExistException;
 import pl.zajavka.domain.exception.NotFoundException;
-import pl.zajavka.infrastructure.security.UserService;
 
 import java.time.OffsetDateTime;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.TreeMap;
 
 @Service
 @AllArgsConstructor
