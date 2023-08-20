@@ -127,7 +127,7 @@ public class FreeTermsController {
     }
 
     private boolean checkExistanceOfPatient(PatientDto patientDto) {
-        return patientDto.getName().isBlank() && patientDto.getSurname().isBlank();
+        return patientDto.getName().isBlank() || patientDto.getSurname().isBlank();
     }
 
     private List<FreeTermDto> getTermsBySpecialization(String specialization) {

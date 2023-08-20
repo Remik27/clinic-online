@@ -1,13 +1,11 @@
 package pl.zajavka.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.With;
+import lombok.*;
 
 import java.time.OffsetDateTime;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @With
 @Data
