@@ -6,6 +6,7 @@ import lombok.*;
 import java.util.Set;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(of = "pesel")
 @With
 @Builder

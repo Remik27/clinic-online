@@ -6,6 +6,7 @@ import java.time.OffsetDateTime;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @With
 @Builder
 public class Visit {
