@@ -34,6 +34,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static pl.zajavka.integration.support.SecurityContextHolderSupport.setSecurityContextHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -163,9 +164,7 @@ public class FreeTermsControllerWebMvcTest {
         //given
         Doctor doctor = new Doctor().withClinicUserId(1);
         FreeTermsDtos freeTermDtos = new FreeTermsDtos(new ArrayList<>());
-        UserDetails userDetails = new User("testuser", "testpassword", new ArrayList<>());
-        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        setSecurityContextHolder();
 
         //when, then
         Mockito.when(doctorService.findDoctorByClinicUserId(Mockito.anyInt())).thenReturn(doctor);

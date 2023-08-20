@@ -7,11 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 import pl.zajavka.api.dto.DoctorDto;
 import pl.zajavka.api.dto.VisitDto;
@@ -23,13 +18,10 @@ import pl.zajavka.domain.Doctor;
 import pl.zajavka.domain.Visit;
 import pl.zajavka.infrastructure.security.UserService;
 
-import java.util.ArrayList;
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static pl.zajavka.integration.support.SecurityContextHolderSupport.setSecurityContextHolder;
 
 @WebMvcTest(controllers = DoctorController.class)
 @AutoConfigureMockMvc(addFilters = false)
@@ -56,9 +48,7 @@ public class DoctorControllerWebMvcTest {
     @Test
     public void testShowDoctorPanel() throws Exception {
         //given
-        UserDetails userDetails = new User("testuser", "testpassword", new ArrayList<>());
-        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        setSecurityContextHolder();
 
         Doctor doctor = new Doctor();
         DoctorDto doctorDto = new DoctorDto();
@@ -77,9 +67,7 @@ public class DoctorControllerWebMvcTest {
     @Test
     public void testShowUpcomingVisits() throws Exception {
         // given
-        UserDetails userDetails = new User("testuser", "testpassword", new ArrayList<>());
-        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        setSecurityContextHolder();
 
         Doctor doctor = new Doctor();
         DoctorDto doctorDto = new DoctorDto();
@@ -98,9 +86,7 @@ public class DoctorControllerWebMvcTest {
     public void testShowFinishedVisits() throws Exception {
 
         // given
-        UserDetails userDetails = new User("testuser", "testpassword", new ArrayList<>());
-        Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        setSecurityContextHolder();
 
         Doctor doctor = new Doctor();
         DoctorDto doctorDto = new DoctorDto();
