@@ -14,6 +14,7 @@ import pl.zajavka.domain.Visit;
 import pl.zajavka.domain.VisitDescription;
 import pl.zajavka.domain.exception.UpdatingCancelledVisitException;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -31,7 +32,7 @@ class DoctorServiceTest {
     private DoctorService doctorService;
 
     @Test
-    void freeTermsCanBeSavedCorrectly(){
+    void freeTermsCanBeSavedCorrectly() {
         //given
         Set<FreeTerm> freeTerms = Set.of(someTerm1(), someTerm2(), someTerm3());
         Doctor doctor = someDoctor1().withFreeTerms(freeTerms);
@@ -44,7 +45,7 @@ class DoctorServiceTest {
     }
 
     @Test
-    void doctorCanBeSavedCorrectly(){
+    void doctorCanBeSavedCorrectly() {
         //given
         Doctor doctor = someDoctor1();
         //when
@@ -55,7 +56,7 @@ class DoctorServiceTest {
     }
 
     @Test
-    void visitDescriptionCanBeAddedCorrectlyWhenVisitIsDone(){
+    void visitDescriptionCanBeAddedCorrectlyWhenVisitIsDone() {
         //given
         VisitDescription visitDescription = someVisitDescription();
         Visit visit = someVisit1();
@@ -63,7 +64,7 @@ class DoctorServiceTest {
         //when
         Mockito.when(visitService.findVisitById(visitDescription.getVisitId())).thenReturn(visit);
         Mockito.when(visitService.isDone(visit)).thenReturn(true);
-        Mockito.when(visitService.addDescription(visit,visitDescription.getDescription()))
+        Mockito.when(visitService.addDescription(visit, visitDescription.getDescription()))
                 .thenReturn(visit.withDescription(someVisitDescription().getDescription()));
         Visit visitWithDescription = doctorService.addDescriptionToVisit(visitDescription);
 
@@ -73,8 +74,9 @@ class DoctorServiceTest {
 
 
     }
+
     @Test
-    void visitDescriptionShouldThrownWhenVisitIsCancelled(){
+    void visitDescriptionShouldThrownWhenVisitIsCancelled() {
         //given
         VisitDescription visitDescription = someVisitDescription();
         Visit visit = someVisit1().withStatus(Visit.Status.CANCELLED).withId(visitDescription.getVisitId());
@@ -92,8 +94,9 @@ class DoctorServiceTest {
 
 
     }
+
     @Test
-    void visitDescriptionCanBeAddedCorrectlyAndUpdateStatusWhenVisitIsFuture(){
+    void visitDescriptionCanBeAddedCorrectlyAndUpdateStatusWhenVisitIsFuture() {
         //given
         VisitDescription visitDescription = someVisitDescription();
         Visit visit = someVisit1().withStatus(Visit.Status.UPCOMING).withId(visitDescription.getVisitId());
@@ -104,15 +107,66 @@ class DoctorServiceTest {
         Mockito.when(visitService.isCancelled(visit)).thenReturn(false);
         Mockito.when(visitService.addDescriptionAndChangeStatus(visit, visitDescription.getDescription()))
                 .thenReturn(visit.withDescription(visitDescription.getDescription()).withStatus(Visit.Status.DONE));
-        Visit visitWithDecription = doctorService.addDescriptionToVisit(visitDescription);
+        Visit visitWithDescription = doctorService.addDescriptionToVisit(visitDescription);
 
 
         //then
-        Assertions.assertNotEquals(visit.getStatus(), visitWithDecription.getStatus());
-        Assertions.assertNotNull(visitWithDecription.getDescription());
-        Assertions.assertEquals(Visit.Status.DONE, visitWithDecription.getStatus());
+        Assertions.assertNotEquals(visit.getStatus(), visitWithDescription.getStatus());
+        Assertions.assertNotNull(visitWithDescription.getDescription());
+        Assertions.assertEquals(Visit.Status.DONE, visitWithDescription.getStatus());
 
 
     }
+
+    @Test
+    void getSpecializationsCanReturnSpecializationsCorrectly() {
+        //given
+        List<String> specializations = Arrays.stream(Doctor.Specialization.values()).map(Enum::name).toList();
+
+        //when
+        List<String> specializationsFromService = doctorService.getSpecializations();
+
+        //then
+        Assertions.assertEquals(specializations, specializationsFromService);
+    }
+
+    @Test
+    void findDoctorByClinicUserIdCanReturnDoctorCorrectly() {
+        //given
+        Doctor doctor = someDoctor1().withClinicUserId(1).withId(1);
+
+        //when
+        Mockito.when(doctorDao.findDoctorByClinicUserId(1)).thenReturn(someDoctor1().withId(1));
+
+        Doctor doctorByClinicUserId = doctorService.findDoctorByClinicUserId(1);
+
+        //then
+        Assertions.assertEquals(doctor, doctorByClinicUserId);
+    }
+
+    @Test
+    void findVisitsByDoctorIdCanReturnVisitsCorrectly() {
+        //given
+        List<Visit> visits = List.of(someVisit1().withStatus(Visit.Status.UPCOMING),
+                someVisit2().withStatus(Visit.Status.UPCOMING),
+                someVisit3().withStatus(Visit.Status.UPCOMING));
+        Integer id = 1;
+        Visit.Status status = Visit.Status.UPCOMING;
+
+        //when
+        Mockito.when(visitService.findVisitsByDoctorId(id, status)).thenReturn(
+                List.of(someVisit1().withStatus(Visit.Status.UPCOMING),
+                        someVisit2().withStatus(Visit.Status.UPCOMING),
+                        someVisit3().withStatus(Visit.Status.UPCOMING)));
+        List<Visit> visitsByDoctorId = doctorService.getVisitsByDoctorId(id, status);
+
+        //then
+        Assertions.assertEquals(visits.size(), visitsByDoctorId.size());
+        for (Visit visit : visitsByDoctorId) {
+            Assertions.assertEquals(status, visit.getStatus());
+        }
+
+    }
+
 
 }

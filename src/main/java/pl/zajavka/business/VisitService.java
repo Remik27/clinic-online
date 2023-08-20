@@ -71,7 +71,7 @@ public class VisitService {
     }
 
 
-    public List<Visit> findUpcomingVisitsByDoctorId(Integer id, Visit.Status status) {
+    public List<Visit> findVisitsByDoctorId(Integer id, Visit.Status status) {
         return switch (status) {
             case UPCOMING -> visitDao.findUpcomingVisitsByDoctorId(id);
             case DONE -> visitDao.findDoneVisitsByDoctorId(id);

@@ -9,7 +9,6 @@ import pl.zajavka.domain.FreeTerm;
 import pl.zajavka.domain.Visit;
 import pl.zajavka.domain.VisitDescription;
 import pl.zajavka.domain.exception.UpdatingCancelledVisitException;
-import pl.zajavka.infrastructure.security.UserService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -55,6 +54,6 @@ public class DoctorService {
 
 
     public List<Visit> getVisitsByDoctorId(Integer id, Visit.Status status) {
-        return visitService.findUpcomingVisitsByDoctorId(id, status);
+        return visitService.findVisitsByDoctorId(id, status);
     }
 }
