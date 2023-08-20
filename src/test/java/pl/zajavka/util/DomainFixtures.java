@@ -2,6 +2,7 @@ package pl.zajavka.util;
 
 import pl.zajavka.domain.*;
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.TreeMap;
@@ -96,6 +97,25 @@ public class DomainFixtures {
         return DiseaseHistory.builder()
                 .patient(somePatient())
                 .diseaseHistory(diseaseMap)
+                .build();
+    }
+    public static FormNfz someFromNfz(){
+        return FormNfz.builder()
+                .benefit("benefit")
+                .location("location")
+                .voivodeshipId("1")
+                .priorityId(1)
+                .forChildren(false)
+                .build();
+    }
+
+    public static TermFromNfz someTermFromNfz(){
+        return TermFromNfz.builder()
+                .provider("provider")
+                .location("location")
+                .queueSize(30)
+                .averagePeriod(26)
+                .firstDate(LocalDate.of(2023,8,20))
                 .build();
     }
 
