@@ -93,7 +93,70 @@ class PatientServiceTest {
         AlreadyExistException exception = Assertions.assertThrows(AlreadyExistException.class, () -> patientService.addPatient(patient));
         //then
         Assertions.assertEquals(message, exception.getMessage());
+    }
 
+    @Test
+    void findPatientByPeselCanReturnPatientCorrectly(){
+        //given
+        String pesel = "11111111111";
+        Patient patient = somePatient().withPesel(pesel);
+
+        //when
+        Mockito.when(patientDao.findPatientByPesel(pesel)).thenReturn(patient);
+
+        Patient patientByPesel = patientService.findPatientByPesel(pesel);
+
+        //then
+
+        Assertions.assertEquals(patient, patientByPesel);
+    }
+    @Test
+    void findPatientByClinicUserIdCanReturnPatientCorrectly(){
+        //given
+        Integer clinicUserId = 1;
+        Patient patient = somePatient().withClinicUserId(clinicUserId);
+
+        //when
+        Mockito.when(patientDao.findPatientByClinicUserId(clinicUserId)).thenReturn(patient);
+
+        Patient patientByClinicUserId = patientService.findPatientByClinicUserId(clinicUserId);
+
+        //then
+
+        Assertions.assertEquals(patient, patientByClinicUserId);
+    }
+    @Test
+    void findPatientByVisitIdCanReturnPatientCorrectly(){
+        //given
+        Integer visitId = 1;
+        Patient patient = somePatient();
+
+        //when
+        Mockito.when(patientDao.findPatientByVisitId(visitId)).thenReturn(patient);
+
+        Patient patientByVisitId = patientService.findPatientByVisitId(visitId);
+
+        //then
+
+        Assertions.assertEquals(patient, patientByVisitId);
+    }
+    @Test
+    void updatePatientCanUpdatePatientCorrectly(){
+        //given
+        Patient patient = somePatient();
+        Patient expectedPatient = patient.withName("other");
+
+        //when
+        Mockito.when(patientDao.updatePatient(expectedPatient)).thenReturn(expectedPatient);
+
+        Patient actualPatient = patientService.updatePatient(expectedPatient);
+
+        //then
+
+        Assertions.assertNotEquals(patient.getName(), actualPatient.getName());
+        Assertions.assertEquals(expectedPatient.getName(), actualPatient.getName());
+        Assertions.assertEquals(patient, actualPatient);
+        Assertions.assertEquals(expectedPatient, actualPatient);
     }
 
 
