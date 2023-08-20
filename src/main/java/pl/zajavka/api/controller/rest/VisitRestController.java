@@ -42,7 +42,7 @@ public class VisitRestController {
     }
     @DeleteMapping(DELETE_CANCELLED_VISIT)
     public Integer deleteCancelledVisits(){
-        List<Visit> visits = visitService.findVisitsByStatus(Visit.Status.CANCELLED);
+        List<Visit> visits = visitService.findCancelledVisits();
         Integer deletedElements = visits.size();
         visitService.delete(visits);
         return deletedElements;

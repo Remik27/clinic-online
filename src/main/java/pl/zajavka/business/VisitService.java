@@ -92,10 +92,11 @@ public class VisitService {
         return visitDao.updateVisit(visit.withStatus(Visit.Status.DONE));
     }
 
-    public List<Visit> findVisitsByStatus(Visit.Status status) {
+    public List<Visit> findCancelledVisits() {
         return visitDao.getListCancelledVisits();
     }
 
+    @Transactional
     public void delete(List<Visit> visits) {
         visitDao.delete(visits);
     }

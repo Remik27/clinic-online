@@ -131,8 +131,6 @@ class VisitServiceTest {
 
         Assertions.assertEquals(visits.size(), visitsByPatient1Id.size());
         Assertions.assertTrue(visitsByPatient2Id.isEmpty());
-
-
     }
 
     @Test
@@ -171,6 +169,7 @@ class VisitServiceTest {
         Assertions.assertTrue(doneVisits.get(0).getTerm().isAfter( doneVisits.get(1).getTerm()));
         Assertions.assertTrue(futureVisits.get(0).getTerm().isBefore( futureVisits.get(1).getTerm()));
     }
+
     @Test
     void cancelVisitCanCancelCorrectly(){
         //given
@@ -183,6 +182,109 @@ class VisitServiceTest {
         Visit cancelledVisit = visitService.cancelVisit(visit.getId());
         //then
         Assertions.assertEquals(Visit.Status.CANCELLED, cancelledVisit.getStatus());
+    }
+    @Test
+    void findVisitsByDoctorIdCanReturnVisitsCorrectly(){
+        //given
+        Integer id = 1;
+        List<Visit> visitsDone = new ArrayList<>(List.of(someVisit1(), someVisit2()));
+        visitsDone.sort(Comparator.comparing(Visit::getTerm));
+        List<Visit> visitsFuture = new ArrayList<>(List.of(someVisit3(), someVisit4()));
+        visitsDone.sort(Comparator.comparing(Visit::getTerm).reversed());
+        //when
+        Mockito.when(visitDao.findDoneVisitsByDoctorId(id))
+                .thenReturn(visitsDone);
+        Mockito.when(visitDao.findUpcomingVisitsByDoctorId(id))
+                .thenReturn(visitsFuture);
+
+        List<Visit> doneVisits = visitService.findVisitsByDoctorId(id, Visit.Status.DONE);
+        List<Visit> futureVisits = visitService.findVisitsByDoctorId(id, Visit.Status.UPCOMING);
+        //then
+
+        Assertions.assertEquals(2, doneVisits.size());
+        Assertions.assertEquals(2, futureVisits.size());
+        Assertions.assertTrue(doneVisits.get(0).getTerm().isAfter( doneVisits.get(1).getTerm()));
+        Assertions.assertTrue(futureVisits.get(0).getTerm().isBefore( futureVisits.get(1).getTerm()));
+    }
+
+    @Test
+    void findVisitsByPatientIdAndStatusCanFoundVisitsCorrectly() {
+        //given
+        Patient patient1 = somePatient().withId(1);
+        Patient patient2 = somePatient().withId(2);
+        Visit visit1 = someVisit1().withPatient(patient1).withStatus(Visit.Status.DONE);
+        Visit visit2 = someVisit2().withPatient(patient1).withStatus(Visit.Status.UPCOMING);
+        List<Visit> visits = List.of(visit1, visit2);
+
+        //when
+        Mockito.when(visitDao
+                .findVisitsByPatientIdAndStatus(patient1.getId(), Visit.Status.DONE)).thenReturn(List.of(visit1));
+        Mockito.when(visitDao
+                .findVisitsByPatientIdAndStatus(patient1.getId(), Visit.Status.UPCOMING)).thenReturn(List.of(visit2));
+        Mockito.when(visitDao
+                .findVisitsByPatientIdAndStatus(patient2.getId(), Visit.Status.DONE)).thenReturn(new ArrayList<>());
+        Mockito.when(visitDao
+                .findVisitsByPatientIdAndStatus(patient2.getId(), Visit.Status.UPCOMING)).thenReturn(new ArrayList<>());
+
+        List<Visit> visitsByPatient1Done =
+                visitService.findVisitsByPatientIdAndStatus(patient1.getId(), Visit.Status.DONE);
+        List<Visit> visitsByPatient1Upcoming =
+                visitService.findVisitsByPatientIdAndStatus(patient1.getId(), Visit.Status.UPCOMING);
+        List<Visit> visitsByPatient2Done =
+                visitService.findVisitsByPatientIdAndStatus(patient2.getId(), Visit.Status.DONE);
+        List<Visit> visitsByPatient2Upcoming =
+                visitService.findVisitsByPatientIdAndStatus(patient2.getId(), Visit.Status.UPCOMING);
+
+        //then
+
+        Assertions.assertTrue(visits.size() > visitsByPatient1Done.size());
+        Assertions.assertTrue(visits.size() > visitsByPatient1Upcoming.size());
+        Assertions.assertTrue(visitsByPatient2Done.isEmpty());
+        Assertions.assertTrue(visitsByPatient2Upcoming.isEmpty());
+        Assertions.assertNotEquals(visitsByPatient1Done.get(0), visitsByPatient1Upcoming.get(0));
+
+    }
+    @Test
+    void addDiseaseCanBeUpdateCorrectly() {
+        //given
+        Visit visit = someVisit3();
+        String disease = "some disease";
+        Visit visitExpected = visit.withDisease(disease);
+
+        //when
+        Mockito.when(visitDao.updateVisit(visitExpected)).thenReturn(visitExpected);
+        Visit visitUpdated = visitService.addDisease(visit, disease);
+
+        //then
+
+        Assertions.assertEquals(disease, visitUpdated.getDisease());
+        Assertions.assertEquals(visitExpected, visitUpdated);
+    }
+    @Test
+    void finishVisitCanFinishCorrectly(){
+        //given
+        Visit visit = someVisit3().withId(1);
+        Visit visitExpected = visit.withStatus(Visit.Status.DONE);
+        //when
+        Mockito.when(visitDao.findById(1)).thenReturn(visit);
+        Mockito.when(visitDao.updateVisit(visitExpected)).thenReturn(visitExpected);
+
+        Visit cancelledVisit = visitService.finishVisit(visit.getId().toString());
+        //then
+        Assertions.assertEquals(Visit.Status.DONE, cancelledVisit.getStatus());
+    }
+
+    @Test
+    void findCancelledVisitsCanReturnVisitsCorrectly(){
+        //given
+        List<Visit> visits = List.of(someVisit1().withStatus(Visit.Status.CANCELLED),
+                someVisit2().withStatus(Visit.Status.CANCELLED));
+        //when
+        Mockito.when(visitDao.getListCancelledVisits()).thenReturn(visits);
+
+        List<Visit> cancelledVisits = visitService.findCancelledVisits();
+        //then
+        Assertions.assertEquals(visits.size(), cancelledVisits.size());
     }
 
 }
