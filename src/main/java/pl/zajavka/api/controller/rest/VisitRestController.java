@@ -18,9 +18,9 @@ import java.util.List;
 @RequestMapping(VisitRestController.VISIT_API)
 public class VisitRestController {
     public static final String VISIT_API = "/api/visit";
-    private static final String CANCEL_VISIT = "/cancel-visit/{visitId}";
-    private static final String GET_VISITS_BY_PESEL = "/get-visits/{pesel}";
-    private static final String DELETE_CANCELLED_VISIT = "/delete-cancelled-visits";
+    public static final String CANCEL_VISIT = "/cancel-visit/{visitId}";
+    public static final String GET_VISITS_BY_PESEL = "/get-visits/{pesel}";
+    public static final String DELETE_CANCELLED_VISIT = "/delete-cancelled-visits";
     private final VisitService visitService;
     private final VisitMapper visitMapper;
     private final PatientService patientService;
