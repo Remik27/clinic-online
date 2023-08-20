@@ -93,12 +93,25 @@ public class DomainFixtures {
                 .build();
     }
 
-    public static DiseaseHistory someDiseaseHistory(TreeMap<OffsetDateTime, String> diseaseMap){
+    public static DiseaseHistory someDiseaseHistory(){
         return DiseaseHistory.builder()
                 .patient(somePatient())
-                .diseaseHistory(diseaseMap)
+                .diseaseHistory(diseaseMap())
                 .build();
     }
+
+    private static TreeMap<OffsetDateTime, String> diseaseMap() {
+        TreeMap<OffsetDateTime, String> diseaseMap = new TreeMap<>();
+        diseaseMap.put(OffsetDateTime
+                .of(2023,12,23,10,30,0,0, ZoneOffset.UTC),
+                "katar");
+        diseaseMap.put(OffsetDateTime
+                .of(2023,11,23,10,30,0,0, ZoneOffset.UTC),
+                "gorączka");
+        return diseaseMap;
+
+    }
+
     public static FormNfz someFromNfz(){
         return FormNfz.builder()
                 .benefit("benefit")
