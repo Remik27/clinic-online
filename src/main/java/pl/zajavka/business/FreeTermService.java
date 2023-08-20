@@ -18,8 +18,8 @@ public class FreeTermService {
     private final FreeTermDao freeTermDao;
     private final VisitService visitService;
     @Transactional
-    public void addFreeTerms(List<FreeTerm> freeTerms){
-        freeTermDao.saveAll(freeTerms);
+    public List<FreeTerm> addFreeTerms(List<FreeTerm> freeTerms){
+        return freeTermDao.saveAll(freeTerms);
     }
 
     @Transactional

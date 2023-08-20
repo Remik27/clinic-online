@@ -17,9 +17,10 @@ public class FreeTermRepository implements FreeTermDao {
     private final FreeTermJpaRepository freeTermJpaRepository;
     private final FreeTermEntityMapper freeTermEntityMapper;
     @Override
-    public void saveAll(List<FreeTerm> freeTerms) {
+    public List<FreeTerm> saveAll(List<FreeTerm> freeTerms) {
         List<FreeTermEntity> freeTermEntities = freeTerms.stream().map(freeTermEntityMapper::mapToEntity).toList();
-        freeTermJpaRepository.saveAll(freeTermEntities);
+        return freeTermJpaRepository.saveAll(freeTermEntities)
+                .stream().map(freeTermEntityMapper::mapFromEntity).toList();
     }
 
     @Override

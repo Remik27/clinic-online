@@ -5,7 +5,7 @@ import pl.zajavka.domain.FreeTerm;
 import java.util.List;
 
 public interface FreeTermDao {
-    void saveAll(List<FreeTerm> freeTerms);
+    List<FreeTerm> saveAll(List<FreeTerm> freeTerms);
 
 
     boolean checkAvailabilityOfTerm(Integer id);
