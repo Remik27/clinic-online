@@ -20,19 +20,19 @@ public class DoctorService {
     private final VisitService visitService;
 
     @Transactional
-    public List<FreeTerm> saveTerms(Doctor doctor){
+    public List<FreeTerm> saveTerms(Doctor doctor) {
         return doctorDao.saveAllTerms(doctor);
     }
 
     @Transactional
-    public Doctor saveDoctor(Doctor doctor){
+    public Doctor saveDoctor(Doctor doctor) {
         return doctorDao.saveDoctor(doctor);
     }
 
     @Transactional
-    public Visit addDescriptionToVisit(VisitDescription visitDescription){
+    public Visit addDescriptionToVisit(VisitDescription visitDescription) {
         Visit visit = visitService.findVisitById(visitDescription.getVisitId());
-        if (visitService.isDone(visit)){
+        if (visitService.isDone(visit)) {
             return visitService.addDescription(visit, visitDescription.getDescription());
         } else if (visitService.isCancelled(visit)) {
             throw new UpdatingCancelledVisitException("Visit [%d] is cancelled".formatted(visit.getId()));
@@ -49,8 +49,6 @@ public class DoctorService {
     public Doctor findDoctorByClinicUserId(Integer userId) {
         return doctorDao.findDoctorByClinicUserId(userId);
     }
-
-
 
 
     public List<Visit> getVisitsByDoctorId(Integer id, Visit.Status status) {
