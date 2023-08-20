@@ -1,9 +1,6 @@
 package pl.zajavka.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.With;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -12,6 +9,7 @@ import java.time.LocalDate;
 @With
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class TermFromNfz {
     private LocalDate firstDate;
     private Integer queueSize;

@@ -24,9 +24,9 @@ public class NFZController {
 
     public static final String NFZ = "/nfz";
 
-    private static final String SELECT_BENEFIT = "/select-benefit";
-    private static final String GET_TERM_FORM = "/get-term-form";
-    private static final String GET_TERM = "/get-term";
+    public static final String SELECT_BENEFIT = "/select-benefit";
+    public static final String GET_TERM_FORM = "/get-term-form";
+    public static final String GET_TERM = "/get-term";
     private final NFZService nfzService;
     private final FormNFZMapper formNFZMapper;
 
