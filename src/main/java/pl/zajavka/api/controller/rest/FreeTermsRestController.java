@@ -28,9 +28,9 @@ import java.util.List;
 @RequestMapping(FreeTermsRestController.FREE_TERMS_API)
 public class FreeTermsRestController {
     public static final String FREE_TERMS_API = "/api/free-terms";
-    private static final String GET_FREE_TERMS = "/api/free-terms/{specialization}";
-    private static final String GET_SPECIALIZATIONS = "/get-specializations";
-    private static final String BOOK_TERM = "/book-term/{termId}";
+    public static final String GET_FREE_TERMS = "/free-terms/{specialization}";
+    public static final String GET_SPECIALIZATIONS = "/get-specializations";
+    public static final String BOOK_TERM = "/book-term/{termId}";
     private final FreeTermService freeTermService;
     private final FreeTermMapper freeTermMapper;
     private final DoctorService doctorService;

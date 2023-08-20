@@ -1,11 +1,14 @@
 package pl.zajavka.util;
 
 import pl.zajavka.api.dto.DiseaseHistoryDto;
+import pl.zajavka.api.dto.FreeTermDto;
 import pl.zajavka.api.dto.PatientDto;
 import pl.zajavka.api.dto.VisitDto;
 import pl.zajavka.domain.Doctor;
 import pl.zajavka.domain.Visit;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.LinkedHashMap;
@@ -16,7 +19,7 @@ public class DtoFixtures {
         return PatientDto.builder()
                 .name("test")
                 .surname("test")
-                .pesel("22222222222")
+                .pesel("11111111111")
                 .build();
     }
 
@@ -69,5 +72,20 @@ public class DtoFixtures {
                                     ZoneOffset.UTC).toString(),
                     "gorączka");
             return diseaseMap;
+    }
+
+    public static FreeTermDto someTermDto1(){
+        return FreeTermDto.builder()
+                .doctorName("doctorName")
+                .date(LocalDate.of(2023, 10, 22))
+                .time(LocalTime.of(9, 30).toString())
+                .build();
+    }
+    public static FreeTermDto someTermDto2(){
+        return FreeTermDto.builder()
+                .doctorName("doctorName")
+                .date(LocalDate.of(2023, 10, 23))
+                .time(LocalTime.of(9, 30).toString())
+                .build();
     }
 }
