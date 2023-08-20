@@ -30,6 +30,7 @@ public class SecurityConfiguration {
                                 .requestMatchers("/",
                                         "/registration",
                                         "/home",
+                                        "/nfz/**",
                                         "/free-terms",
                                         "/select-specialization",
                                         "/book-term/{freeTermId}",

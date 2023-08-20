@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>List of free terms</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+          crossorigin="anonymous">
+    <script th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.min.js}"></script>
+    <style>
+        body {
+            background-color: #C2FAE2;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container text-center">
+    <h1>Uzupełnij dane</h1>
+    <form th:action="@{/nfz/get-term}" method="GET" th:object="${formAttributes}">
+        <div>
+            <label for="benefit">Świadczenie:</label>
+            <select id="benefit" class="form-select" th:field="*{benefit}" required>
+                <option th:each="option : ${availableBenefits.benefits}" th:value="${option}" th:text="${option}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="voivodeship">Województwo:</label>
+            <select id="voivodeship" class="form-select" th:field="*{voivodeship}" required>
+                <option th:each="voivodeship : ${voivodeships.voivodeships}" th:value="${voivodeship}" th:text="${voivodeship}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="location">Lokalizacja:</label>
+            <input type="text" id="location" th:field="*{location}">
+        </div>
+        <div>
+            <label for="priority">Przypadek:</label>
+            <select id="priority" class="form-select" th:field="*{priority}" required>
+                <option th:each="option : ${cases.cases}" th:value="${option}" th:text="${option}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="forChildren">Dla dzieci:</label>
+            <input type="checkbox" id="forChildren" th:field="*{forChildren}">
+        </div>
+        <button type="submit" class="btn btn-primary">Sprawdź</button>
+    </form>
+</div>
+</body>
+</html>

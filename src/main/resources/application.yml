@@ -4,6 +4,11 @@ server:
   servlet:
     context-path: /clinic-online/
 
+api:
+  nfz:
+    url: https://api.nfz.gov.pl/app-itl-api
+
+
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource

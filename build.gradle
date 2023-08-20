@@ -28,11 +28,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
 
 	implementation 'org.flywaydb:flyway-core'
-    testImplementation 'org.projectlombok:lombok:1.18.26'
-	testImplementation 'org.projectlombok:lombok:1.18.22'
 	runtimeOnly 'org.postgresql:postgresql'
 
 
@@ -46,6 +45,7 @@ dependencies {
 	implementation "org.openapitools:jackson-databind-nullable:${jacksonDatabindNullableVersion}"
 	implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
 	implementation "io.swagger:swagger-annotations:${swaggerAnnotationsVersion}"
+	implementation "com.google.code.findbugs:jsr305:${jsr305Version}"
 
 
 	testCompileOnly 'org.projectlombok:lombok'
@@ -58,11 +58,42 @@ dependencies {
 }
 
 
+
 dependencyManagement {
 	imports {
 		mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
 	}
 }
+
+openApiGenerate {
+	generatorName = "java"
+	library = "webclient"
+	configOptions = [
+			serializableModel   : "true",
+			dateLibrary         : "java8",
+			serializationLibrary: "jackson"
+	]
+	typeMappings = [
+			OffsetDateTime: "LocalDate"
+	]
+	importMappings = [
+			"java.time.OffsetDateTime": "java.time.LocalDate"
+	]
+	validateSpec = false
+	skipValidateSpec = true
+	outputDir = "$buildDir/generated-sources/openapi".toString()
+	inputSpec = "$rootDir/src/main/resources/contracts/api-nfz-v1.3.json".toString()
+	apiPackage = "pl.zajavka.infrastructure.nfz.api"
+	modelPackage = "pl.zajavka.infrastructure.nfz.model"
+}
+
+sourceSets {
+	main {
+		java.srcDirs += "$buildDir/generated-sources/openapi/src/main/java"
+	}
+}
+
+compileJava.dependsOn tasks.openApiGenerate
 
 test {
 	useJUnitPlatform()
