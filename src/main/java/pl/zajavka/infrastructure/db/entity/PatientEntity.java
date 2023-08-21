@@ -10,6 +10,7 @@ import java.util.Set;
 @EqualsAndHashCode(of = "pesel")
 @NoArgsConstructor
 @Builder
+@With
 @Data
 @Table(name = "patient")
 public class PatientEntity {
