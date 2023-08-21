@@ -32,7 +32,7 @@ public class RegistrationController {
         model.addAttribute("availableRoles", availableRoles);
         model.addAttribute("availableSpecializations", availableSpecializations);
 
-        return new ModelAndView("/registration");
+        return new ModelAndView("registration");
     }
 
     @PostMapping(REGISTRATION)
@@ -44,9 +44,9 @@ public class RegistrationController {
             model.addAttribute("userDto", userDto);
             model.addAttribute("availableRoles", availableRoles);
             model.addAttribute("availableSpecializations", availableSpecializations);
-            return new ModelAndView("/registration");
+            return new ModelAndView("registration");
         }
         userService.saveUser(userDto);
-        return new ModelAndView("/registered-successfully");
+        return new ModelAndView("registered-successfully");
     }
 }

@@ -8,6 +8,7 @@ import java.util.Set;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(of = "pesel")
 @With
 @Builder
 @Data

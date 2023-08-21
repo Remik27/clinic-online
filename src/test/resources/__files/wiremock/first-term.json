@@ -1,0 +1,73 @@
+{
+  "meta": {
+    "context": "https://api.nfz.gov.pl/app-itl-api/schemas/#queue",
+    "count": 3,
+    "title": "queue",
+    "page": 1,
+    "url": "https://api.nfz.gov.pl/app-itl-api/schema/queue",
+    "limit": 1,
+    "provider": "Narodowy Fundusz Zdrowia",
+    "date-published": "2019-02-26T10:49:23+01:00",
+    "date-modified": "2023-08-21T20:11:12+02:00",
+    "description": "Zasób zwraca pierwszy dostępny termin leczenia dla każdego świadczenia medycznego zgodnie z wybranymi parametrami wyszukiwania. Odpowiedź zawiera szczegółowe informacje  oraz listę świadczeń medycznych we właściwej kolejności wyświetlania (według pierwszej dostępnego terminu leczenia)",
+    "keywords": "kolejki,terminy leczenia,Narodowy Fundusz Zdrowia,termin,lekarz,poradnia,przychodnia,leczenie,terminy,wolne terminy",
+    "language": "PL",
+    "content-type": "application/json; charset=utf-8",
+    "is-part-of": "Terminy leczenia",
+    "message": null
+  },
+  "links": {
+    "first": "/app-itl-api/queues?page=1&limit=1&format=json&case=1&province=01&benefit=ODDZIA%C5%81%20OKULISTYCZNY&locality=Wroc%C5%82aw",
+    "prev": null,
+    "self": "/app-itl-api/queues?page=1&limit=1&format=json&case=1&province=01&benefit=ODDZIA%C5%81%20OKULISTYCZNY&locality=Wroc%C5%82aw",
+    "next": "/app-itl-api/queues?page=2&limit=1&format=json&case=1&province=01&benefit=ODDZIA%C5%81%20OKULISTYCZNY&locality=Wroc%C5%82aw",
+    "last": "/app-itl-api/queues?page=3&limit=1&format=json&case=1&province=01&benefit=ODDZIA%C5%81%20OKULISTYCZNY&locality=Wroc%C5%82aw"
+  },
+  "data": [
+    {
+      "type": "queue",
+      "id": "0368037b-9b84-a047-e063-b4200a0a9a73",
+      "attributes": {
+        "case": 1,
+        "benefit": "ODDZIAŁ OKULISTYCZNY",
+        "many-places": "N",
+        "provider": "4 WOJSKOWY SZPITAL KLINICZNY Z POLIKLINIKĄ SAMODZIELNY PUBLICZNY ZAKŁAD OPIEKI ZDROWOTNEJ WE WROCŁAWIU",
+        "provider-code": "3101277",
+        "regon-provider": "930090240",
+        "nip-provider": "8992228956",
+        "teryt-provider": "0264011",
+        "place": "KLINICZNY ODDZIAŁ OKULISTYCZNY",
+        "address": "UL. RUDOLFA WEIGLA 5",
+        "locality": "WROCŁAW-KRZYKI",
+        "phone": "+48 261 660 425",
+        "teryt-place": "0264039",
+        "registry-number": "000000018521-W-02",
+        "id-resort-part-VII": "023",
+        "id-resort-part-VIII": "4600",
+        "benefits-for-children": null,
+        "covid-19": "N",
+        "toilet": "Y",
+        "ramp": "Y",
+        "car-park": "Y",
+        "elevator": "Y",
+        "latitude": null,
+        "longitude": null,
+        "statistics": {
+          "provider-data": {
+            "awaiting": 109,
+            "removed": 26,
+            "average-period": 16,
+            "update": "2023-07"
+          },
+          "computed-data": null
+        },
+        "dates": {
+          "applicable": true,
+          "date": "2023-09-04",
+          "date-situation-as-at": "2023-08-20"
+        },
+        "benefits-provided": null
+      }
+    }
+  ]
+}

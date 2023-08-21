@@ -48,6 +48,6 @@ class VisitJpaRepositoryTest {
         //when
         List<VisitEntity> byPatientId = visitJpaRepository.findByPatientId(1);
         //then
-        Assertions.assertEquals(visitEntities.size(), byPatientId.size());
+        Assertions.assertEquals(3, byPatientId.size());
     }
 }

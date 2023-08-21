@@ -1,12 +1,18 @@
 package pl.zajavka.util;
 
+import pl.zajavka.domain.Doctor;
 import pl.zajavka.infrastructure.db.entity.DoctorEntity;
 import pl.zajavka.infrastructure.db.entity.FreeTermEntity;
 import pl.zajavka.infrastructure.db.entity.PatientEntity;
 import pl.zajavka.infrastructure.db.entity.VisitEntity;
+import pl.zajavka.infrastructure.security.RoleEntity;
+import pl.zajavka.infrastructure.security.Roles;
+import pl.zajavka.infrastructure.security.UserDto;
+import pl.zajavka.infrastructure.security.UserEntity;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.Set;
 
 public class EntityFixtures {
 
@@ -70,4 +76,20 @@ public class EntityFixtures {
     }
 
 
+    public static RoleEntity someRole() {
+        return RoleEntity.builder()
+                .id(1)
+                .role(Roles.DOCTOR.name())
+                .build();
+    }
+
+    public static UserEntity someUser() {
+        return UserEntity.builder()
+                .userName("username")
+                .password("password")
+                .email("email@email.pl")
+                .roles(Set.of(someRole()))
+                .active(true)
+                .build();
+    }
 }

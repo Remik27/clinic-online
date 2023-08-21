@@ -14,6 +14,8 @@ public interface VisitEntityMapper {
     VisitEntity mapToEntity(Visit visit);
 
     @Mapping(target = "patient", source = "patient", qualifiedByName = "mapFromPatientEntity")
+    @Mapping(target = "doctor.visits",ignore = true )
+    @Mapping(target = "doctor.freeTerms", ignore = true)
     Visit mapFromEntity(VisitEntity entity);
 
     @Named("mapFromPatientEntity")

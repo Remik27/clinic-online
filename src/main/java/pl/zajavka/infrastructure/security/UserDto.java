@@ -3,13 +3,11 @@ package pl.zajavka.infrastructure.security;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.With;
+import lombok.*;
 import pl.zajavka.domain.Doctor;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @With
 @Data

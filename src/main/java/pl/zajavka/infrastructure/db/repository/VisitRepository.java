@@ -92,4 +92,5 @@ public class VisitRepository implements VisitDao {
         visitJpaRepository.deleteAll(entities);
     }
 
+
 }

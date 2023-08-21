@@ -1,0 +1,1 @@
+insert into clinic_user_role (clinic_user_id, role_id) values (7, 3);

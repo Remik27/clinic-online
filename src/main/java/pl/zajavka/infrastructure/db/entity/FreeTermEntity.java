@@ -22,7 +22,7 @@ public class FreeTermEntity {
     @Column(name = "term")
     private OffsetDateTime term;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doctor_id")
     private DoctorEntity doctor;
 }

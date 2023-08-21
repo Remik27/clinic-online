@@ -24,7 +24,7 @@ public class UserService {
     }
     public void saveUser(UserDto userDto) {
         UserEntity user = UserEntity.builder()
-                .userName(userDto.getName())
+                .userName(userDto.getUsername())
                 .password(passwordEncoder.encode(userDto.getPassword()))
                 .email(userDto.getEmail())
                 .active(true)

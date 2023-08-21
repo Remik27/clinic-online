@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Error message</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+        crossorigin="anonymous">
+  <script th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.min.js}"></script>
+  <style>
+        body {
+            background-color: #C2FAE2;
+        }
+
+
+    </style>
+</head>
+
+<body>
+<div class="container">
+  <h1>Coś poszło nie tak</h1>
+  <b><span th:if="${errorMessage}" th:text="${errorMessage}">Error</span></b>
+  <br>
+  <br>
+  <p>
+    <a th:href="@{/}" class="btn btn-info" role="button">Strona główna</a>
+  </p>
+</div>
+</body>
+
+</html>
