@@ -1,124 +1,156 @@
 plugins {
-	id 'java'
-	id 'jacoco'
-	id 'org.springframework.boot' version "${springBootVerison}"
-	id 'io.spring.dependency-management' version "${dependencyManagmentVersion}"
-	id "org.openapi.generator" version "${openapiGeneratorVersion}"
+    id 'java'
+    id 'jacoco'
+    id 'org.springframework.boot' version "${springBootVerison}"
+    id 'io.spring.dependency-management' version "${dependencyManagmentVersion}"
+    id "org.openapi.generator" version "${openapiGeneratorVersion}"
 }
 
 group = 'pl.zajavka'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+    sourceCompatibility = '17'
 }
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
 
 
-	implementation 'org.flywaydb:flyway-core'
-	runtimeOnly 'org.postgresql:postgresql'
+    implementation 'org.flywaydb:flyway-core'
+    runtimeOnly 'org.postgresql:postgresql'
 
 
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	implementation "org.mapstruct:mapstruct:${mapstructVersion}"
-	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
-	annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
 
-	implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocOpenApiVersion}"
-	implementation "org.openapitools:jackson-databind-nullable:${jacksonDatabindNullableVersion}"
-	implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
-	implementation "io.swagger:swagger-annotations:${swaggerAnnotationsVersion}"
-	implementation "com.google.code.findbugs:jsr305:${jsr305Version}"
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:${springDocOpenApiVersion}"
+    implementation "org.openapitools:jackson-databind-nullable:${jacksonDatabindNullableVersion}"
+    implementation "javax.annotation:javax.annotation-api:${javaxAnnotationApiVersion}"
+    implementation "io.swagger:swagger-annotations:${swaggerAnnotationsVersion}"
+    implementation "com.google.code.findbugs:jsr305:${jsr305Version}"
 
 
-	testCompileOnly 'org.projectlombok:lombok'
-	testAnnotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
-	testImplementation 'org.springframework.security:spring-security-test'
-	testImplementation 'org.testcontainers:junit-jupiter'
-	testImplementation 'org.testcontainers:postgresql'
-	testImplementation "org.jacoco:org.jacoco.agent:${jacocoVersion}"
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-testcontainers'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.testcontainers:junit-jupiter'
+    testImplementation 'org.testcontainers:postgresql'
 
 }
-
 
 
 dependencyManagement {
-	imports {
-		mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
-	}
+    imports {
+        mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+    }
 }
 
 openApiGenerate {
-	generatorName = "java"
-	library = "webclient"
-	configOptions = [
-			serializableModel   : "true",
-			dateLibrary         : "java8",
-			serializationLibrary: "jackson"
-	]
-	typeMappings = [
-			OffsetDateTime: "LocalDate"
-	]
-	importMappings = [
-			"java.time.OffsetDateTime": "java.time.LocalDate"
-	]
-	validateSpec = false
-	skipValidateSpec = true
-	outputDir = "$buildDir/generated-sources/openapi".toString()
-	inputSpec = "$rootDir/src/main/resources/contracts/api-nfz-v1.3.json".toString()
-	apiPackage = "pl.zajavka.infrastructure.nfz.api"
-	modelPackage = "pl.zajavka.infrastructure.nfz.model"
+    generatorName = "java"
+    library = "webclient"
+    configOptions = [
+            serializableModel   : "true",
+            dateLibrary         : "java8",
+            serializationLibrary: "jackson"
+    ]
+    typeMappings = [
+            OffsetDateTime: "LocalDate"
+    ]
+    importMappings = [
+            "java.time.OffsetDateTime": "java.time.LocalDate"
+    ]
+    validateSpec = false
+    skipValidateSpec = true
+    outputDir = "$buildDir/generated-sources/openapi".toString()
+    inputSpec = "$rootDir/src/main/resources/contracts/api-nfz-v1.3.json".toString()
+    apiPackage = "pl.zajavka.infrastructure.nfz.api"
+    modelPackage = "pl.zajavka.infrastructure.nfz.model"
 }
 
 sourceSets {
-	main {
-		java.srcDirs += "$buildDir/generated-sources/openapi/src/main/java"
-	}
+    main {
+        java.srcDirs += "$buildDir/generated-sources/openapi/src/main/java"
+    }
 }
+
 
 compileJava.dependsOn tasks.openApiGenerate
 
 jacoco {
-	toolVersion = "${jacocoVersion}"
-	reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+    toolVersion = "${jacocoVersion}"
 }
 
-test {
-	finalizedBy jacocoTestReport
-}
 jacocoTestReport {
-	reports {
-		xml.required = false
-		csv.required = false
-		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
-	}
+    dependsOn test
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: ["pl/zajavka/infrastructure/nfz/**/*",
+                    "pl/zajavka/**/mapper/*"]
+            )
+        }))
+        reports {
+            xml.required = false
+            csv.required = false
+            html.outputLocation = layout.buildDirectory.dir('jacocoHtmlCustom')
+        }
+    }
 }
 
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.80
+            }
+
+        }
+
+    }
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: [
+                            "pl/zajavka/infrastructure/nfz/**/*",
+                    "pl/zajavka/**/mapper/*"]
+            )
+        }))
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
+
+
 test {
-	useJUnitPlatform()
-	testLogging {
-		events "passed", "skipped", "failed"
-	}
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+    finalizedBy jacocoTestReport
+
 }
 
 compileJava.options.encoding = 'UTF-8'

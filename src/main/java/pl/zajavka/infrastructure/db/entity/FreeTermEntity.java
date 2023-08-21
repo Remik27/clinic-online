@@ -1,16 +1,14 @@
 package pl.zajavka.infrastructure.db.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.OffsetDateTime;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@With
 @Builder
 @Data
 @Table(name = "free_term")
