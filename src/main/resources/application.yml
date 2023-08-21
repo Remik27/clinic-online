@@ -2,7 +2,7 @@
 server:
   port: 8190
   servlet:
-    context-path: /clinic-online/
+    context-path: /clinic-online
 
 api:
   nfz:

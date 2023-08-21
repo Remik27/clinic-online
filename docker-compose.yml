@@ -1,0 +1,43 @@
+version: '3.1'
+services:
+  backend:
+    build: .
+    ports:
+      - 8190:8190
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://PostgreSQL:5432/clinic-online
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    networks:
+      - spring-boot-postgres
+    depends_on:
+      - PostgreSQL
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://PostgreSQL:5432 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  PostgreSQL:
+    image: postgres:15.0
+    ports:
+      -  5432:5432
+    environment:
+      - POSTGRES_DB=clinic-online
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - spring-boot-postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db-data:
+
+networks:
+  spring-boot-postgres:
