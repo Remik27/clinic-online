@@ -35,7 +35,10 @@ public class SecurityConfiguration {
                                         "/select-specialization",
                                         "/book-term/{freeTermId}",
                                         "/registered-successfully",
-                                        "/book-term").permitAll()
+                                        "/book-term",
+                                        "/swagger-ui/**",
+                                        "/v3/api-docs/**",
+                                        "/api/**").permitAll()
                                 .requestMatchers("/patient-panel",
                                         "/visit-details/**",
                                         "/finished-visits/**",
@@ -52,11 +55,11 @@ public class SecurityConfiguration {
                                         "/add-diagnosis",
                                         "/finish-visit/{visitId}",
                                         "/added-successfully").hasAuthority(Roles.DOCTOR.name())
-                                .requestMatchers("/api/**").hasAuthority(Roles.REST_API.name())
+
                 )
                 .formLogin(Customizer.withDefaults())
                 .logout((logout) ->
-                        logout.deleteCookies("remove")
+                        logout.deleteCookies("JSESSIONID")
                                 .invalidateHttpSession(false)
                                 .logoutSuccessUrl("/")
                                 .permitAll()
